@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>HTML | Forms</title>
+    </head>
+    <body>
+        <h1>HTML | Forms </h1>
+        <form action="/search" method="get">
+           
+          <div>
+            <label for="username">Enter a name:</label>
+            <input type="text" id="username" placeholder="Username" name="username">
+          </div>
+
+          <div>
+            <label for="password">Enter a password:</label>
+            <input type="password" placeholder="Password" id="password" name="password">
+          </div>
+
+          <div>
+            <label for="color">Pick a color:</label>
+            <input type="color" id="color" name="color">
+          </div>
+
+          <div>
+            <!-- Alternative way of label input (less common) -->
+            <label>Enter a number:
+                <input type="number" id="name" placeholder="Number" name="number">
+            </label>
+          </div>
+          <button type="submit">Submit  </button>
+          <button type="button">DO NOT SUMBIT THE FORM</button>
+        </form>
+
+        <h2>More input !!</h2>
+
+        <form action="/search">
+          <div>
+            <h3>choose your monster's features:</h3>
+            <input type="checkbox" name="scales" id="scales" checked>
+            <label for="scales">Scales</label>
+ 
+            <input type="checkbox" name="horns" id="horns">
+            <label for="horns">Horns</label>
+
+          </div>
+          
+          <div>
+            <h3>Select a maintenance drone:</h3>
+            <input type="radio" name="drone" id="huey" value="huey" checked>
+            <label for="huey">Huey</label>
+
+            <input type="radio" name="drone" id="Dewey" value="Dewey">
+            <label for="Dewey">Dewey</label>
+
+            <input type="radio" name="drone" id="louie" value="louie">
+            <label for="louie">Louie</label>
+          </div>
+
+           <div>
+            <h3>Select your fav pet :</h3>
+
+            <select name="pet_name" id="pet">
+              <option value="Cat">Cat</option>
+              <option value="Dog" selected>Dog</option>
+              <option value="Rabbit">Rabbit</option>
+              <option value="Birds">Birds</option>
+            </select>
+           </div>
+
+           <div>
+              <label for="audio">Audio :</label>
+              <input type="range" name="audio_level" id="audio" min="10" max="100" step="10">
+           </div>
+
+           <div>
+            <label for="msg">Message :</label>
+             <textarea name="msg" id="msg" cols="30" rows="5" placeholder="Enter the Message"></textarea>
+           </div>
+          <button type="submit">Submit it</button>
+        </form>
+    </body>
+</html>
