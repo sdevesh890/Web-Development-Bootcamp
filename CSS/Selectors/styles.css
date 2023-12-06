@@ -1,0 +1,61 @@
+
+#heading1
+{
+    color: purple;
+    background-color: beige;
+}
+
+#heading2
+{
+    color: chocolate;
+    background-color: cornsilk;
+}
+
+.heading3style
+{
+    color: chartreuse;
+    background-color: black;
+}
+
+/* Descendant Selectors */
+footer a { 
+    color: deeppink;
+    text-decoration: none;
+}
+
+section p a{
+    color: indianred;
+    text-decoration: none;
+}
+/*
+ * Immediate Adjcent Selectors 
+ */
+h3 + p {
+    color: darkslateblue;
+}
+/* Direct Descendant Selectors */
+footer > a {
+   color: maroon;
+}
+
+footer a:hover
+{
+    color: rgb(100, 34, 45);
+    text-decoration: underline red wavy;
+}
+
+section p a:hover
+{
+    color: red;
+    text-decoration: underline brown wavy;
+    font-size: 18px;
+}
+section p a:visited
+{
+    color: rgb(41, 53, 5);
+}
+
+section p:nth-of-type(even)
+{
+    background-color: lightseagreen;
+}
