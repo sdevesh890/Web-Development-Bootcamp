@@ -1,0 +1,38 @@
+div
+{
+    height: 200px;
+    width: 200px;
+    margin: 10px;
+    margin-left: 20px;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+#one
+{
+     background-color: #a7c957;
+     border-width: 5px;
+     border-color: #283618;
+     border-style: solid;   
+     /* box-sizing: border-box; */
+     border-radius: 5%;
+     
+}
+
+#two
+{
+    background-color: #6a994e;
+    border-width: 5px;
+    border-color: #e9edc9;
+    border-style: dashed;
+    border-left-color: #ccd5ae;
+    border-left-width: 10px;
+    /* Margin on bottom for div1 and margin on top for div 2 would be not added instead 
+    highest margin will apply */
+}
+
+#three
+{
+    background-color: #386641;
+    border: 5px solid #73ba9b;
+}
