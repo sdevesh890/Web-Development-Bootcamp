@@ -1,0 +1,84 @@
+/* section{
+    height: 60vh;
+    width: 40vw;
+    background-color: magenta;
+    margin: 1em;
+} */
+#rgba
+{
+    height: 50%;
+    width: 50%;
+    /* Alpha channel don't include any text and element in transprancy*/
+    background-color: rgba(219, 33, 64,0.5);
+}
+
+#opacity
+{
+    height: 50%;
+    width: 50%;
+    background-color: red;
+    /* Opacity make full transprancy including text and all the child
+    elements */
+    opacity: 0.5;
+}
+
+section
+{
+    margin-bottom: 4em;
+}
+
+section div
+{
+    height: 100px;
+    width: 100px;
+    margin: 1em;
+    background-color: darkslategrey;
+    display: inline-block;
+    border: 2px solid black;
+}
+
+#middle
+{
+    background-color: darkkhaki;
+}
+
+#static #middle
+{
+    position: static;
+    /* Nothing , its gonna be defualt  */
+    top: 100px;
+}
+
+#relative #middle
+{
+    position: relative;
+    top: 30px;
+    left: 30px;
+}
+#absolute
+{
+    position: relative;
+}
+#absolute #middle
+{
+    position: absolute;
+    top: 30px;
+    left: 40px;
+}
+
+#fixed #middle
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+#sticky
+{
+    height: 100vh;
+    width: 100vw;
+}
+#sticky #middle
+{
+    position: sticky;
+    top: 20px;
+}
