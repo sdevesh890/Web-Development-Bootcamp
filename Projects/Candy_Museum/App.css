@@ -1,0 +1,43 @@
+ @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Work+Sans:wght@100;600&display=swap');
+
+body
+{
+    background-color: #f5d9d5;
+    font-family: 'Nunito' , sans-serif;
+}
+
+#mainNavbar
+{
+    font-size: 1.2rem;
+    font-weight: 100;
+}
+#mainNavbar .navbar-brand
+{
+    margin: 0em 1.2em;
+    color: #EA1C2C;
+}
+.nav-link{
+    margin: 0em 1em;
+    color: white;
+    font-weight: 700;
+}
+.nav-link:hover{
+    color: #EA1C2C;
+}
+#headingGroup span
+{
+    color: #EA1C2C;
+}
+#headingGroup h1
+{
+    font-weight: 100;
+    font-size: 3rem;
+}
+@media (max-width: 1000px)
+{
+    #headingGroup h1
+{
+    font-weight: 100;
+    font-size: 2.7rem;
+}
+}
