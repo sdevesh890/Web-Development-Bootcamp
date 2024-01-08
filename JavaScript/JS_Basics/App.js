@@ -45,3 +45,10 @@ console.log(value);
 let i=0;
 console.log(i++);
 console.log(++i);
+
+alert("Don't click okay it is very dangerous.");
+let result = prompt("Please Enter the number");
+
+let res = parseInt(result); // convert the string into int
+
+console.log(res);
