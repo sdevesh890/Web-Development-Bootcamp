@@ -1,0 +1,95 @@
+body
+{
+    font-family:Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+.container
+{
+    height: 450px;
+    width: 420px;
+    /* border: 1px solid black; */
+    margin: auto auto;
+}
+.imgBoard
+{
+    height: 50%;
+    border: 1px solid gray;
+    border-radius: 15px;
+}
+.img
+{
+    height: 85%;  
+    background-image: url('https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+#title
+{
+    margin: 6px;
+}
+
+.operation
+{
+   padding-left: 40px;
+}
+.operation h1{
+    font-size: 2.5rem;
+
+}
+.operation h4{
+    margin-top: -25px;
+}
+label
+{
+    font-weight: 600;
+}
+select
+{
+    width: 50px;
+    border-radius: 40px;
+    padding: 4px;
+}
+.buttons {
+    display: flex;
+    width: 420px; /* Width of the parent div */
+    margin-left: -40px;
+    margin-top: 40px;
+    
+}
+
+.btn {
+    flex: 1;
+    margin: 0 0px;
+    height: 40px; 
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.btn:nth-of-type(1)
+{
+    background-color: rgb(19, 152, 135);
+}
+.btn:nth-of-type(2)
+{
+    background-color: rgb(27, 198, 255);
+}
+.btn:nth-of-type(3)
+{
+    background-color: #f64747;
+}
+.winner
+{
+    color: green;
+}
+.loser
+{
+    color: red;
+}
+.disabled
+{
+    color: rgb(187, 161, 161);
+    cursor:not-allowed;
+}
