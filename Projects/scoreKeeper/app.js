@@ -3,11 +3,17 @@ const p2btn = document.getElementById('p2btn');
 const reset = document.getElementById('reset'); 
 const player1 = document.querySelector('#player1');
 const player2 = document.querySelector('#player2');
+const limitSize = document.getElementById('gameRound');
 
 let p1Score = 0;
 let p2Score = 0;
 let isGameOver = false;
-const limit = 5;
+let limit = 3;
+
+limitSize.addEventListener('change',function()
+{
+      limit = limitSize.value;
+});
 
 p1btn.addEventListener('click',function()
 {
@@ -58,4 +64,6 @@ reset.addEventListener('click',function()
     player1.classList.remove('loser','winner');
     p1btn.classList.remove('disabled');
     p2btn.classList.remove('disabled');
+    limitSize.value = 3;
+    limit = 3;
 });
