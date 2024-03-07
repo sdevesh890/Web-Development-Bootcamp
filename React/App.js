@@ -1,6 +1,9 @@
+import React  from "react";
+import ReactDOM from "react-dom/client";
+
 const heading = React.createElement("h1",{
     id:"heading",
-    class: "reactHead" ,
+    className: "reactHead" ,
     style : {
         border: "2px solid black" , 
         backgroundColor : "red",
@@ -10,7 +13,7 @@ const heading = React.createElement("h1",{
 const heading2 = React.createElement("h2",{
 
     id : "heading2",
-    class : "reactHead2",
+    className : "reactHead2",
     style: {
         border : "2px solid black",
         backgroundColor : "yellow"

@@ -1,0 +1,32 @@
+What is Bundlers ?
+A bundler in React is a tool that allows developers to package their code into a single file or bundle. This bundle can then be used to run the application in the browser. Bundlers are used to reduce the size of the code and improve the performance of the application. Common bundlers used with React are Webpack , Parcel and Vite.
+
+npm -> Manage all packages.
+
+package.json --> define metadata about out project.
+
+pacakge-lock.json --> you get to know about actual version of your dependencies.
+
+dependency -> A dependency is just a package that your project uses.  
+
+Dev Dependencies -> In package.json file, there is an object called as dev Dependencies and it consists of all the packages that are used in the project in its development phase and not in the production or testing environment with its version number. 
+
+Tilde (~) notation:
+The tilde (~) notation is employed to match the latest patch version while freezing the major and minor versions. This notation is useful for automatically accepting bug fixes, considering that patch updates primarily address bugs.
+
+Example: The ~1.2.0 will update all the future patch updates. We have to write just ~1.2.0 and all the next patch update dependencies. For example, 1.2.1, 1.2.2, 1.2.5……………1.2.x.
+Note: Patch updates are very small security changes in a package that is why the ~version is approximately equivalent to the version.
+
+Caret (^) notation:
+It automatically updates both minor and patch updates.
+
+Example: The ^1.2.4 will update all the future Minor and patch updates, for example, ^1.2.4 will automatically change the dependency to 1.x.x if any update occurs. 
+
+
+HMR - Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running, without a full reload.
+
+A file-watcher is a process which monitors a specific directory for the arrival of any files.
+
+
+What is Browserslist?
+Browserslist is a tool that allows specifying which browsers should be supported in your frontend app by specifying "queries" in a config file. It's used by frameworks/libraries such as React, Angular and Vue, but it's not limited to them.
