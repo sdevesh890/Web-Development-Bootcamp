@@ -30,3 +30,19 @@ A file-watcher is a process which monitors a specific directory for the arrival 
 
 What is Browserslist?
 Browserslist is a tool that allows specifying which browsers should be supported in your frontend app by specifying "queries" in a config file. It's used by frameworks/libraries such as React, Angular and Vue, but it's not limited to them.
+
+
+Babel --> Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments.
+
+Render -> something update in React.
+
+Key --> Uniquely identify each element and help for easy to render.
+
+JSX (JavaScript XML) --> Allow us to write HTML like syntax in Javascript. 
+
+Component --> 
+    -  functional Component -> new way
+    -  class Component -> old way but better to know
+
+
+Component Composition --> When you use one function Component inside another.

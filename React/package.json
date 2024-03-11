@@ -2,14 +2,16 @@
   "name": "react",
   "version": "1.0.0",
   "description": "Learning React",
-  "main": "App.js",
   "scripts": {
+    "start": "parcel index.html",
+    "build" : "parcel build index.html",
     "test": "jest"
   },
   "author": "Devesh Sharma",
   "license": "ISC",
   "devDependencies": {
     "parcel": "^2.12.0",
+    "parcel-bundler": "^1.12.5",
     "process": "^0.11.10"
   },
   "dependencies": {
