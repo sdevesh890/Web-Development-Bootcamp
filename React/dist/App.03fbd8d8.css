@@ -1,0 +1,89 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+#LogoImg
+{
+    height: 100px;
+    width: 100px;
+}
+
+.header
+{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    background-color: lightcoral;
+}
+
+.nav-items ul{
+    display: flex;
+    list-style: none;
+}
+
+.nav-items ul li , .SearchItem
+{
+    margin: 0.5rem 1.7rem 0rem 0rem;
+    padding: 2rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-items ul li a
+{
+   text-decoration: none;
+   color: black;
+}
+
+.nav-items > ul > li :hover
+{
+   color: lightgoldenrodyellow;
+   transition: all 0.4s ease-in;
+}
+
+.SearchItem button
+{
+    padding: 0.3rem;
+    background-color: orange;
+    border-color: red;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.SearchItem button:hover
+{
+    background-color: lightgoldenrodyellow;
+}
+#Searchinput
+{
+    height: 1.5rem;
+    width: 200px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 550;
+}
+
+.RestaurantList
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 1rem;
+    gap: 1rem;
+}
+
+.Card
+{
+    width: 300px;
+    border: 1px solid black;
+    padding: 0.5rem;
+}
+
+.Card > img
+{
+    height: 300px;
+    width: 300px;
+}
+
+/*# sourceMappingURL=/App.03fbd8d8.css.map */

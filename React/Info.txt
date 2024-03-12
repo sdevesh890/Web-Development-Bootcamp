@@ -46,3 +46,7 @@ Component -->
 
 
 Component Composition --> When you use one function Component inside another.
+
+React.Fragment --> it is a component , If you use this then you dont have to use Div for any component.
+
+props --> Passing data into my component.

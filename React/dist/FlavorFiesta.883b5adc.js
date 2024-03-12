@@ -28863,55 +28863,232 @@ if ("development" === 'production') {
     }
   };
 }
-},{"react-dom":"node_modules/react-dom/index.js"}],"App.js":[function(require,module,exports) {
+},{"react-dom":"node_modules/react-dom/index.js"}],"img/titleLogo.png":[function(require,module,exports) {
+module.exports = "/titleLogo.96d94e1c.png";
+},{}],"FlavorFiesta.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
 var _client = _interopRequireDefault(require("react-dom/client"));
+var _titleLogo = _interopRequireDefault(require("./img/titleLogo.png"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-// --> CODE WITHOUT JSX
-// const heading = createElement("h1",{
-//     id:"heading",
-//     className: "reactHead" ,
-//     style : {
-//         border: "2px solid black" , 
-//         backgroundColor : "red",
-//     },
-//     key : "h1",
-// },"My name is Devesh Shamra");
-
-// const heading2 = createElement("h2",{
-
-//     id : "heading2",
-//     className : "reactHead2",
-//     style: {
-//         border : "2px solid black",
-//         backgroundColor : "yellow"
-//     } ,
-//      key : "h2",
-// },"Here I'm learning React");
-
-//--> WITH JSX SYNTAX
-//-> React Eelement
-var heading = /*#__PURE__*/_react.default.createElement("h1", {
-  id: "title1",
-  key: "heading"
-}, "This is a JSX CODE (Heading 1)");
-
-// functional Component
-// NAME OF COMPONENT STARTS WITH CAPITAL LATTER
 var Title = function Title() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "This is title of the page"));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("a", {
+    href: "/"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _titleLogo.default,
+    alt: "Logo Image",
+    id: "LogoImg"
+  })));
 };
-var Myname = "Devesh Sharma";
+var Search = function Search() {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "SearchItem"
+  }, /*#__PURE__*/_react.default.createElement("form", {
+    action: ""
+  }, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "",
+    id: "Searchinput",
+    placeholder: "Search Your Item"
+  }), /*#__PURE__*/_react.default.createElement("button", {
+    type: "submit"
+  }, "SEARCH")));
+};
 var Header = function Header() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(Title, null), /*#__PURE__*/_react.default.createElement("h1", null, "Heading 1"), /*#__PURE__*/_react.default.createElement("h2", null, "Heading 2"), heading, Myname);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "header"
+  }, /*#__PURE__*/_react.default.createElement(Title, null), /*#__PURE__*/_react.default.createElement("div", {
+    className: "nav-items"
+  }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    href: ""
+  }, "Home")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    href: ""
+  }, "About")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    href: ""
+  }, "Contact")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    href: ""
+  }, "Cart")))), /*#__PURE__*/_react.default.createElement(Search, null));
 };
 
-// const container = createElement("div",{},[heading]); 
-// const root = ReactDOM.createRoot(document.getElementById("root"));
-// root.render(<Header/>);
-},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+//Config Driven UI
+var restaurantList = [{
+  "id": "144020",
+  "name": "UBQ by Barbeque Nation",
+  "cloudinaryImageId": "fkrillp6fs8ig7p3torx",
+  "locality": "Ashok Cosmos Mall",
+  "areaName": "Civil Lines",
+  "costForTwo": "₹300 for two",
+  "cuisines": ["North Indian", "Barbecue", "Biryani", "Kebabs", "Mughlai", "Desserts"],
+  "avgRating": 4.2,
+  "parentId": "10804",
+  "avgRatingString": "4.2",
+  "totalRatingsString": "1K+",
+  "sla": {
+    "deliveryTime": 51,
+    "lastMileTravel": 6.8
+  },
+  "availability": {
+    "nextCloseTime": "2024-03-12 23:00:00",
+    "opened": true
+  }
+}, {
+  "id": "253782",
+  "name": "McDonald's",
+  "cloudinaryImageId": "535fc9f9c135f7982317bbb6a64a1ffc",
+  "locality": "UP Agra TDI Mall",
+  "areaName": "Tajganj",
+  "costForTwo": "₹400 for two",
+  "cuisines": ["American"],
+  "avgRating": 4.3,
+  "parentId": "630",
+  "avgRatingString": "4.3",
+  "totalRatingsString": "1K+",
+  "sla": {
+    "deliveryTime": 27,
+    "lastMileTravel": 2.7
+  }
+}, {
+  "id": "809929",
+  "name": "Burger King",
+  "cloudinaryImageId": "4311bdadd4a6539042d570c04335d209",
+  "locality": "Fatehabad Road",
+  "areaName": "Agra",
+  "costForTwo": "₹350 for two",
+  "cuisines": ["Burgers", "American"],
+  "avgRating": 4.3,
+  "parentId": "166",
+  "avgRatingString": "4.3",
+  "totalRatingsString": "100+",
+  "sla": {
+    "deliveryTime": 28,
+    "lastMileTravel": 1.8
+  }
+}, {
+  "id": "75858",
+  "name": "KFC",
+  "cloudinaryImageId": "f01666ac73626461d7455d9c24005cd4",
+  "locality": "Tajganj",
+  "areaName": "Tajganj",
+  "costForTwo": "₹450 for two",
+  "cuisines": ["Burgers", "Biryani", "American", "Snacks", "Fast Food"],
+  "avgRating": 4.3,
+  "parentId": "547",
+  "avgRatingString": "4.3",
+  "totalRatingsString": "1K+",
+  "sla": {
+    "deliveryTime": 26,
+    "lastMileTravel": 2.6
+  }
+}, {
+  "id": "35561",
+  "name": "Dasaprakash",
+  "cloudinaryImageId": "59ef6ec974bcff29ce0463da17c4cda6",
+  "locality": "Sector 104, Expressway",
+  "areaName": "Tajganj",
+  "costForTwo": "₹700 for two",
+  "cuisines": ["South Indian", "North Indian", "Continental", "Chinese"],
+  "avgRating": 4.7,
+  "veg": true,
+  "parentId": "68689",
+  "avgRatingString": "4.7",
+  "totalRatingsString": "1K+",
+  "sla": {
+    "deliveryTime": 36,
+    "lastMileTravel": 3
+  }
+}, {
+  "id": "674149",
+  "name": "La Pino'z Pizza",
+  "cloudinaryImageId": "d20fdc8c86aa8bd0638f47dd013d46f9",
+  "locality": "CROWN PLAZA",
+  "areaName": "Tajganj",
+  "costForTwo": "₹400 for two",
+  "cuisines": ["Pizzas", "Pastas", "Italian", "Desserts", "Beverages"],
+  "avgRating": 4,
+  "parentId": "4961",
+  "avgRatingString": "4.0",
+  "totalRatingsString": "100+",
+  "sla": {
+    "deliveryTime": 27,
+    "lastMileTravel": 1.7
+  }
+}, {
+  "id": "74720",
+  "name": "Pizza Hut",
+  "cloudinaryImageId": "2b4f62d606d1b2bfba9ba9e5386fabb7",
+  "locality": "Tajganj",
+  "areaName": "Tajganj",
+  "costForTwo": "₹350 for two",
+  "cuisines": ["Pizzas"],
+  "avgRating": 4.2,
+  "parentId": "721",
+  "avgRatingString": "4.2",
+  "totalRatingsString": "1K+",
+  "sla": {
+    "deliveryTime": 31,
+    "lastMileTravel": 2.1
+  }
+}, {
+  "id": "75743",
+  "name": "Berco's -If You Love Chinese",
+  "cloudinaryImageId": "318fef5f3d67765fecf8045cecef6d49",
+  "locality": "Tajganj",
+  "areaName": "Tajganj",
+  "costForTwo": "₹850 for two",
+  "cuisines": ["Chinese", "Thai", "Asian"],
+  "avgRating": 4.4,
+  "parentId": "471817",
+  "avgRatingString": "4.4",
+  "totalRatingsString": "100+",
+  "sla": {
+    "deliveryTime": 30,
+    "lastMileTravel": 2
+  }
+}, {
+  "id": "780599",
+  "name": "Little Italy",
+  "cloudinaryImageId": "020ae6de4b41aae52ac4c7c3270ae8a4",
+  "locality": "Nagar Nigam Food Safety Zone",
+  "areaName": "FATEHABAD ROAD",
+  "costForTwo": "₹1200 for two",
+  "cuisines": ["Italian", "Pizzas", "Pastas", "Salads", "Desserts"],
+  "avgRating": 3.4,
+  "veg": true,
+  "parentId": "600",
+  "avgRatingString": "3.4",
+  "totalRatingsString": "7",
+  "sla": {
+    "deliveryTime": 32,
+    "lastMileTravel": 2
+  }
+}];
+var RestaurantCard = function RestaurantCard(_ref) {
+  var name = _ref.name,
+    avgRating = _ref.avgRating,
+    cuisines = _ref.cuisines,
+    areaName = _ref.areaName,
+    cloudinaryImageId = _ref.cloudinaryImageId;
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "Card"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: "https://media-assets.swiggy.com/swiggy/image/upload/" + cloudinaryImageId,
+    alt: "Burger King"
+  }), /*#__PURE__*/_react.default.createElement("h1", null, name), /*#__PURE__*/_react.default.createElement("h2", null, avgRating), /*#__PURE__*/_react.default.createElement("p", null, cuisines.join(", ")), /*#__PURE__*/_react.default.createElement("p", null, areaName));
+};
+var Body = function Body() {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "RestaurantList"
+  }, restaurantList.map(function (res) {
+    return /*#__PURE__*/_react.default.createElement(RestaurantCard, res);
+  }));
+};
+var Applayout = function Applayout() {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(Header, null), /*#__PURE__*/_react.default.createElement(Body, null));
+};
+var root = _client.default.createRoot(document.getElementById('root'));
+root.render( /*#__PURE__*/_react.default.createElement(Applayout, null));
+},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","./img/titleLogo.png":"img/titleLogo.png"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -28936,7 +29113,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1590" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5947" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
@@ -29080,5 +29257,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","App.js"], null)
-//# sourceMappingURL=/App.d36a57b6.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","FlavorFiesta.js"], null)
+//# sourceMappingURL=/FlavorFiesta.883b5adc.js.map
