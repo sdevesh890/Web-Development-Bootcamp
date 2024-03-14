@@ -50,3 +50,21 @@ Component Composition --> When you use one function Component inside another.
 React.Fragment --> it is a component , If you use this then you dont have to use Div for any component.
 
 props --> Passing data into my component.
+
+What is the Virtual DOM ?
+Representation of our DOM called Virtual DOM.
+
+Why we need ?
+
+When changes are made to the UI in React, instead of directly manipulating the real DOM, React makes changes to this Virtual DOM. React then compares the updated Virtual DOM with the previous state of the Virtual DOM to determine what has changed. This process is called "reconciliation."
+After determining the changes, React applies only the necessary updates to the real DOM, minimizing the number of actual manipulations needed. This process is much more efficient compared to directly updating the real DOM for each change, as the real DOM manipulation can be costly in terms of performance.
+
+WE CAN EXPORT OUR FILE IN TWO WAYS -->
+{
+   1. export default componentName 
+   2. {componentName} from file directory;
+}
+
+Hooks --> Just a normal function and its allow you to use state and other features in functional component.
+
+useState() --> useState is a React Hook that lets you add a state variable to your component. 
