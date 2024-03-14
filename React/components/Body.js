@@ -1,62 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { RestaurantCard } from "./config";
-import { useState } from 'react';
 import { restaurantList } from "./config";
-
-function filterData(searchText , restaurant) 
-{
-    const arr = [];
-
-    for(let i=0; i<restaurant.length; i++)
-    {
-        if(restaurant[i].name.includes(searchText))
-        {
-            arr.push(restaurant[i]);
-        }
-    }
-    return arr;
-
-}
-
-export const Search=()=>
-{
-    const [restaurant , setRestautant] = useState(restaurantList);
-    //searchText is a local state variable
-    const [searchText, setsearchText] = useState();
-    return(
-        <div className="SearchItem">
-            
-            <form action="">
-                <input 
-                type="text"
-                name="" 
-                id="Searchinput" 
-                placeholder="Search Your Item" 
-                value={searchText}
-                onChange={(e)=> {
-                    setsearchText(e.target.value);
-                }}
-                />
-                <button type="submit" id='input-btn'
-                onClick={(e)=>
-                {   
-                    e.preventDefault();
-                    const data =  filterData(searchText , restaurant);
-                    setRestautant(data);
-                }}>SEARCH</button>
-            </form>
-        </div>
-    );
-}
-const Body = () => {
+import Header from "./Header";
+const Body = ({restData}) => {
     return (
         <div className="RestaurantList">
-            {restaurantList.map((res) => {
+            {restData.map((res) => {
                 return <RestaurantCard {...res} key={res.id} />;
             })}
         </div>
     );
 };
 
+
+export const Helper = () =>
+{
+    const[restData , setrestData] = useState(restaurantList);
+    return (
+        <>
+         <Header setrestData = {setrestData}/>
+         <Body restData = {restData}/>
+        </>
+    );
+}
 export default Body;
 

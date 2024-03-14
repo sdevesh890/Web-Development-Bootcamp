@@ -28863,9 +28863,7 @@ if ("development" === 'production') {
     }
   };
 }
-},{"react-dom":"node_modules/react-dom/index.js"}],"img/titleLogo.png":[function(require,module,exports) {
-module.exports = "/titleLogo.96d94e1c.png";
-},{}],"components/config.js":[function(require,module,exports) {
+},{"react-dom":"node_modules/react-dom/index.js"}],"components/config.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29040,18 +29038,21 @@ var restaurantList = exports.restaurantList = [{
     "lastMileTravel": 2
   }
 }];
-},{"react":"node_modules/react/index.js"}],"components/Body.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"img/titleLogo.png":[function(require,module,exports) {
+module.exports = "/titleLogo.96d94e1c.png";
+},{}],"components/Header.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Search = void 0;
+exports.default = exports.Title = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _titleLogo = _interopRequireDefault(require("../img/titleLogo.png"));
 var _config = require("./config");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -29067,7 +29068,17 @@ function filterData(searchText, restaurant) {
   }
   return arr;
 }
-var Search = exports.Search = function Search() {
+var Title = exports.Title = function Title() {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("a", {
+    href: "/"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _titleLogo.default,
+    alt: "Logo Image",
+    id: "LogoImg"
+  })));
+};
+var Header = function Header(_ref) {
+  var setrestData = _ref.setrestData;
   var _useState = (0, _react.useState)(_config.restaurantList),
     _useState2 = _slicedToArray(_useState, 2),
     restaurant = _useState2[0],
@@ -29078,6 +29089,18 @@ var Search = exports.Search = function Search() {
     searchText = _useState4[0],
     setsearchText = _useState4[1];
   return /*#__PURE__*/_react.default.createElement("div", {
+    className: "header"
+  }, /*#__PURE__*/_react.default.createElement(Title, null), /*#__PURE__*/_react.default.createElement("div", {
+    className: "nav-items"
+  }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    href: ""
+  }, "Home")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    href: ""
+  }, "About")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    href: ""
+  }, "Contact")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    href: ""
+  }, "Cart")))), /*#__PURE__*/_react.default.createElement("div", {
     className: "SearchItem"
   }, /*#__PURE__*/_react.default.createElement("form", {
     action: ""
@@ -29096,73 +29119,70 @@ var Search = exports.Search = function Search() {
     onClick: function onClick(e) {
       e.preventDefault();
       var data = filterData(searchText, restaurant);
-      setRestautant(data);
+      setrestData(data);
     }
-  }, "SEARCH")));
+  }, "SEARCH"))));
 };
-var Body = function Body() {
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "RestaurantList"
-  }, _config.restaurantList.map(function (res) {
-    return /*#__PURE__*/_react.default.createElement(_config.RestaurantCard, _extends({}, res, {
-      key: res.id
-    }));
-  }));
-};
-var _default = exports.default = Body;
-},{"react":"node_modules/react/index.js","./config":"components/config.js"}],"components/Header.js":[function(require,module,exports) {
+var _default = exports.default = Header;
+},{"react":"node_modules/react/index.js","../img/titleLogo.png":"img/titleLogo.png","./config":"components/config.js"}],"components/Body.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Title = void 0;
-var _react = _interopRequireDefault(require("react"));
-var _titleLogo = _interopRequireDefault(require("../img/titleLogo.png"));
-var _Body = require("./Body");
+exports.default = exports.Helper = void 0;
+var _react = _interopRequireWildcard(require("react"));
+var _config = require("./config");
+var _Header = _interopRequireDefault(require("./Header"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var Title = exports.Title = function Title() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("a", {
-    href: "/"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: _titleLogo.default,
-    alt: "Logo Image",
-    id: "LogoImg"
-  })));
-};
-var Header = function Header() {
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+var Body = function Body(_ref) {
+  var restData = _ref.restData;
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "header"
-  }, /*#__PURE__*/_react.default.createElement(Title, null), /*#__PURE__*/_react.default.createElement("div", {
-    className: "nav-items"
-  }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
-    href: ""
-  }, "Home")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
-    href: ""
-  }, "About")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
-    href: ""
-  }, "Contact")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
-    href: ""
-  }, "Cart")))), /*#__PURE__*/_react.default.createElement(_Body.Search, null));
+    className: "RestaurantList"
+  }, restData.map(function (res) {
+    return /*#__PURE__*/_react.default.createElement(_config.RestaurantCard, _extends({}, res, {
+      key: res.id
+    }));
+  }));
 };
-var _default = exports.default = Header;
-},{"react":"node_modules/react/index.js","../img/titleLogo.png":"img/titleLogo.png","./Body":"components/Body.js"}],"FlavorFiesta.js":[function(require,module,exports) {
+var Helper = exports.Helper = function Helper() {
+  var _useState = (0, _react.useState)(_config.restaurantList),
+    _useState2 = _slicedToArray(_useState, 2),
+    restData = _useState2[0],
+    setrestData = _useState2[1];
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Header.default, {
+    setrestData: setrestData
+  }), /*#__PURE__*/_react.default.createElement(Body, {
+    restData: restData
+  }));
+};
+var _default = exports.default = Body;
+},{"react":"node_modules/react/index.js","./config":"components/config.js","./Header":"components/Header.js"}],"FlavorFiesta.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
 var _client = _interopRequireDefault(require("react-dom/client"));
-var _Header = _interopRequireDefault(require("./components/Header"));
-var _Body = _interopRequireDefault(require("./components/Body"));
+var _Body = require("./components/Body");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 // import {Title, Search} from './components/Header' --> Named Import
-//Default Import 
+// import Header from "./components/Header"; //Default Import 
+// import Body from "./components/Body";
 
 var Applayout = function Applayout() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Header.default, null), /*#__PURE__*/_react.default.createElement(_Body.default, null));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Body.Helper, null));
 };
 var root = _client.default.createRoot(document.getElementById('root'));
 root.render( /*#__PURE__*/_react.default.createElement(Applayout, null));
-},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","./components/Header":"components/Header.js","./components/Body":"components/Body.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","./components/Body":"components/Body.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29187,7 +29207,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5153" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "7485" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
