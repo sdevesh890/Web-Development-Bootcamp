@@ -4,6 +4,11 @@ import ReactDOM from "react-dom/client";
 // import Header from "./components/Header"; //Default Import 
 // import Body from "./components/Body";
 import { Helper } from "./components/Body";
+import { createBrowserRouter , RouterProvider } from "react-router-dom";
+import About from "./components/About";
+import Error from "./components/Error";
+import RestaurantMenu from "./components/RestaurantMenu";
+
 const Applayout = () =>
 {
     return(
@@ -21,5 +26,21 @@ const Applayout = () =>
         </React.Fragment>
     );
 }
+
+const appRouter = createBrowserRouter([
+    {
+        path:"/",
+        element:<Applayout/>,
+        errorElement: <Error/>,
+    },
+    {
+        path:"/about",
+        element:<About/>
+    },
+    {
+        path:"/restaurant/:id",
+        element : <RestaurantMenu/>
+    }
+]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Applayout/>);
+root.render(<RouterProvider router={appRouter}/>);

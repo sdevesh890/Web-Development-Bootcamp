@@ -68,3 +68,10 @@ WE CAN EXPORT OUR FILE IN TWO WAYS -->
 Hooks --> Just a normal function and its allow you to use state and other features in functional component.
 
 useState() --> useState is a React Hook that lets you add a state variable to your component. 
+
+Monolithic application --> Built as single unit 
+Microservices -> built as collection of smaller independently deployable.
+
+useEffect (hook) --> By using this , you tell React to do something after render.
+
+react-router-dom --> used for routing in react.
