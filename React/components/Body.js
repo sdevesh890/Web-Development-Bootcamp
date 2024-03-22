@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RestaurantCard } from "./config";
 import { restaurantList } from "./config";
 import { Link } from "react-router-dom";
 import Header from "./Header";
+import Shimmer from "../utils/Shimmer";
+
 const Body = ({restData}) => {
-    return (
+    return(restData?.length===0)?(
+        <Shimmer/>
+    ):(
         <div className="RestaurantList">
             {restData.map((res) => {
-                return <Link to={"/restaurant/"+res.info}><RestaurantCard {...res?.info}/></Link>
+                return <Link to={"/restaurant/"+res.info?.id} className="Cardinfo"><RestaurantCard {...res?.info}/></Link>
             })}
         </div>
     );
@@ -16,9 +20,9 @@ const Body = ({restData}) => {
 
 export const Helper = () =>
 {
-    
-    const[restData , setrestData] = useState(restaurantList);
-    return (
+   
+    const[restData , setrestData] = useState([]);
+     return (
         <>
          <Header setrestData = {setrestData}/>
          <Body restData = {restData}/>

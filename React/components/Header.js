@@ -3,7 +3,6 @@ import Titlelogo from '../img/titleLogo.png';
 import { useState , useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
-
 function filterData(searchText , restaurant) 
 {
     const arr = [];
@@ -33,7 +32,7 @@ export const Title = () =>
 
 const Header =({setrestData})=>
 {
-    const [restaurant,setRestaurant] = useState({setrestData});
+    const [restaurant,setRestaurant] = useState();
     //searchText is a local state variable
     const [searchText, setsearchText] = useState();
 

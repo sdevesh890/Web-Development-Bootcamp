@@ -79,8 +79,10 @@
 .Card
 {
     width: 300px;
+    height: 500px;
     border: 1px solid black;
     padding: 0.5rem;
+    transition: all 0.4s;
 }
 
 .Card > img
@@ -88,3 +90,39 @@
     height: 300px;
     width: 300px;
 }
+
+
+.Cardinfo
+{
+    text-decoration: none;
+    color: black;
+}
+.Cardinfo:hover
+{
+    color: rgba(146, 46, 0);
+    .Card
+    {
+       transform: scale(1.1);
+       margin: 1rem;
+       box-shadow: 15px 10px rgb(242, 169, 169);
+    }
+}
+
+.Shimmer
+{
+   height: 350px;
+   width: 300px;
+   background: linear-gradient(-45deg, #e5c2ad 40%, #ffff 50%, #ffff 60%);
+   background-size: 300%;
+   background-position-x: 100%;
+   animation: shimmer 1s infinite linear;
+   display: inline-block;
+   margin: 0.1rem;
+}
+@keyframes shimmer {
+    to {
+       background-position-x: 0%
+    }
+ }
+
+ 

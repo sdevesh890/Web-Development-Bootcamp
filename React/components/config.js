@@ -3,9 +3,9 @@ export const RestaurantCard =({name , avgRating , cuisines , areaName , cloudina
 {
     return(
         <div className="Card">
-            <img src={"https://media-assets.swiggy.com/swiggy/image/upload/"+ cloudinaryImageId} alt="Burger King" />
+            <img src={"https://media-assets.swiggy.com/swiggy/image/upload/"+ cloudinaryImageId} alt={name} />
             <h1>{name}</h1>
-            <h2>{avgRating}</h2>
+            <h2>{avgRating}&#9733;</h2>
             <p>{cuisines?.join(", ")}</p>
             <p>{areaName}</p>
         </div>
