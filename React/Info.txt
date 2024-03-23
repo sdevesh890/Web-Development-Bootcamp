@@ -75,3 +75,7 @@ Microservices -> built as collection of smaller independently deployable.
 useEffect (hook) --> By using this , you tell React to do something after render.
 
 react-router-dom --> used for routing in react.
+
+Class Based Component --> component which build using class.
+--> Important for interview purpose
+

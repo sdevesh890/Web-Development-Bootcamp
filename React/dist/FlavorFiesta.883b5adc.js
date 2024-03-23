@@ -37837,7 +37837,8 @@ var Header = function Header(_ref) {
   }, /*#__PURE__*/_react.default.createElement(Title, null), /*#__PURE__*/_react.default.createElement("div", {
     className: "nav-items"
   }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
+    to: "/",
+    className: "active"
   }, "Home")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/about"
   }, "About")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
@@ -37868,7 +37869,9 @@ var Header = function Header(_ref) {
   }, "SEARCH"))));
 };
 var _default = exports.default = Header;
-},{"react":"node_modules/react/index.js","../img/titleLogo.png":"img/titleLogo.png","react-router-dom":"node_modules/react-router-dom/dist/index.js"}],"utils/Shimmer.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../img/titleLogo.png":"img/titleLogo.png","react-router-dom":"node_modules/react-router-dom/dist/index.js"}],"img/loading.webp":[function(require,module,exports) {
+module.exports = "/loading.e810ebf9.webp";
+},{}],"utils/Shimmer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37876,16 +37879,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
+var _loading = _interopRequireDefault(require("../img/loading.webp"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var Shimmer = function Shimmer() {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Array(25).fill(" ").map(function (e) {
     return /*#__PURE__*/_react.default.createElement("div", {
-      className: "Shimmer"
-    });
+      className: "loadingGif"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: _loading.default,
+      alt: ""
+    }));
   }));
 };
 var _default = exports.default = Shimmer;
-},{"react":"node_modules/react/index.js"}],"components/Body.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../img/loading.webp":"img/loading.webp"}],"components/Body.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38099,6 +38106,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactRouterDom = require("react-router-dom");
+var _loading = _interopRequireDefault(require("../img/loading.webp"));
 var _Constant = require("../utils/Constant");
 var _useRestaurant = _interopRequireDefault(require("../utils/useRestaurant"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -38178,21 +38186,43 @@ var RestaurantMenu = function RestaurantMenu() {
       return _ref.apply(this, arguments);
     };
   }();
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
-    className: "restaurant-img w-64 h-44 border-r-4  mt-4",
+  return restaurantMenu.length === 0 ? /*#__PURE__*/_react.default.createElement("div", {
+    className: "loadingGif"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _loading.default,
+    alt: ""
+  })) : /*#__PURE__*/_react.default.createElement("div", {
+    className: "restaurant-menu"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "restaurant-details"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    className: "restaurant-img",
     src: _Constant.IMG_CDN_URL + (restaurantDetails === null || restaurantDetails === void 0 ? void 0 : restaurantDetails.cloudinaryImageId),
     alt: restaurantDetails === null || restaurantDetails === void 0 ? void 0 : restaurantDetails.name
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, restaurantDetails === null || restaurantDetails === void 0 ? void 0 : restaurantDetails.name), /*#__PURE__*/_react.default.createElement("p", null, restaurantDetails === null || restaurantDetails === void 0 || (_restaurantDetails$cu = restaurantDetails.cuisines) === null || _restaurantDetails$cu === void 0 ? void 0 : _restaurantDetails$cu.join(", ")))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "Recommended "), /*#__PURE__*/_react.default.createElement("p", null, restaurantMenu === null || restaurantMenu === void 0 ? void 0 : restaurantMenu.length, " ITEMS")), /*#__PURE__*/_react.default.createElement("div", null, restaurantMenu.map(function (item) {
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: "details"
+  }, /*#__PURE__*/_react.default.createElement("h2", null, restaurantDetails === null || restaurantDetails === void 0 ? void 0 : restaurantDetails.name), /*#__PURE__*/_react.default.createElement("p", null, restaurantDetails === null || restaurantDetails === void 0 || (_restaurantDetails$cu = restaurantDetails.cuisines) === null || _restaurantDetails$cu === void 0 ? void 0 : _restaurantDetails$cu.join(", ")))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "menu-section"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "menu-header"
+  }, /*#__PURE__*/_react.default.createElement("h3", null, "Menu"), /*#__PURE__*/_react.default.createElement("p", null, restaurantMenu === null || restaurantMenu === void 0 ? void 0 : restaurantMenu.length, " ITEMS")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "menu-items"
+  }, restaurantMenu.map(function (item) {
     return /*#__PURE__*/_react.default.createElement("div", {
-      key: item === null || item === void 0 ? void 0 : item.id
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, item === null || item === void 0 ? void 0 : item.name), /*#__PURE__*/_react.default.createElement("p", null, (item === null || item === void 0 ? void 0 : item.price) > 0 ? new Intl.NumberFormat("en-IN", {
+      key: item === null || item === void 0 ? void 0 : item.id,
+      className: "menu-item"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "item-details"
+    }, /*#__PURE__*/_react.default.createElement("h3", null, item === null || item === void 0 ? void 0 : item.name), /*#__PURE__*/_react.default.createElement("p", null, (item === null || item === void 0 ? void 0 : item.price) > 0 ? new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR"
-    }).format((item === null || item === void 0 ? void 0 : item.price) / 100) : " ")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, item === null || item === void 0 ? void 0 : item.description)), /*#__PURE__*/_react.default.createElement("hr", null));
-  })))));
+    }).format((item === null || item === void 0 ? void 0 : item.price) / 100) : " ")), /*#__PURE__*/_react.default.createElement("div", {
+      className: "description"
+    }, item === null || item === void 0 ? void 0 : item.description));
+  }))));
 };
 var _default = exports.default = RestaurantMenu;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/dist/index.js","../utils/Constant":"utils/Constant.js","../utils/useRestaurant":"utils/useRestaurant.js"}],"FlavorFiesta.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/dist/index.js","../img/loading.webp":"img/loading.webp","../utils/Constant":"utils/Constant.js","../utils/useRestaurant":"utils/useRestaurant.js"}],"FlavorFiesta.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -38213,7 +38243,8 @@ var Applayout = function Applayout() {
 var appRouter = (0, _reactRouterDom.createBrowserRouter)([{
   path: "/",
   element: /*#__PURE__*/_react.default.createElement(Applayout, null),
-  errorElement: /*#__PURE__*/_react.default.createElement(_Error.default, null)
+  errorElement: /*#__PURE__*/_react.default.createElement(_Error.default, null),
+  children: []
 }, {
   path: "/about",
   element: /*#__PURE__*/_react.default.createElement(_About.default, null)
@@ -38250,7 +38281,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6023" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8447" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

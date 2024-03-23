@@ -1,5 +1,6 @@
 import React, { useState ,useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Logo from "../img/loading.webp";
 import {
     swiggy_menu_api_URL,
     IMG_CDN_URL,
@@ -45,52 +46,46 @@ const RestaurantMenu = () =>
                 setRestaurantMenu(uniqueMenuItems);
                 
     }
-    return(
-        <div>
-        <div>
-            <img
-                className="restaurant-img w-64 h-44 border-r-4  mt-4"
-                src={IMG_CDN_URL + restaurantDetails?.cloudinaryImageId}
-                alt={restaurantDetails?.name}
-            />
-            <div>
-                <h2>{restaurantDetails?.name}</h2>
-                <p>{restaurantDetails?.cuisines?.join(", ")}</p>
-
-            </div>
+    return (restaurantMenu.length===0)?(
+        <div className="loadingGif"><img src={Logo} alt="" /></div>
+    ):(
+        <div className="restaurant-menu">
+        <div className="restaurant-details">
+          <img
+            className="restaurant-img"
+            src={IMG_CDN_URL + restaurantDetails?.cloudinaryImageId}
+            alt={restaurantDetails?.name}
+          />
+          <div className="details">
+            <h2>{restaurantDetails?.name}</h2>
+            <p>{restaurantDetails?.cuisines?.join(", ")}</p>
+          </div>
         </div>
-
-        <div>
-            <div>
-                <div>
-                    <h3>Recommended </h3>
-                    <p>{restaurantMenu?.length} ITEMS</p>
+        <div className="menu-section">
+          <div className="menu-header">
+            <h3>Menu</h3>
+            <p>{restaurantMenu?.length} ITEMS</p>
+          </div>
+          <div className="menu-items">
+            {restaurantMenu.map((item) => (
+              <div key={item?.id} className="menu-item">
+                <div className="item-details">
+                  <h3>{item?.name}</h3>
+                  <p>
+                    {item?.price > 0
+                      ? new Intl.NumberFormat("en-IN", {
+                          style: "currency",
+                          currency: "INR",
+                        }).format(item?.price / 100)
+                      : " "}
+                  </p>
                 </div>
-                <div>
-                    {restaurantMenu.map((item) => (
-                        <div key={item?.id}>
-                            <div>
-                                <h3>{item?.name}</h3>
-                                <p>
-                                    {item?.price > 0
-                                        ? new Intl.NumberFormat("en-IN", {
-                                            style: "currency",
-                                            currency: "INR",
-                                        }).format(item?.price / 100)
-                                        : " "}
-                                </p>
-                            </div>
-                            <div>
-                                <div>{item?.description}
-                                </div>
-                            </div>
-                            <hr></hr>
-                        </div>
-                    ))}
-                </div>
-            </div>
+                <div className="description">{item?.description}</div>
+              </div>
+            ))}
+          </div>
         </div>
-    </div>
+      </div>
     );
 }
 
