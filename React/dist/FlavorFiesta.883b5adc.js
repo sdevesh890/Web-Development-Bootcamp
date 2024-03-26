@@ -37711,167 +37711,1894 @@ function useViewTransitionState(to, opts) {
   return (0, _router.matchPath)(path.pathname, nextPath) != null || (0, _router.matchPath)(path.pathname, currentPath) != null;
 }
 //#endregion
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-router":"node_modules/react-router/dist/index.js","@remix-run/router":"node_modules/@remix-run/router/dist/router.js"}],"img/titleLogo.png":[function(require,module,exports) {
-module.exports = "/titleLogo.96d94e1c.png";
-},{}],"components/Header.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-router":"node_modules/react-router/dist/index.js","@remix-run/router":"node_modules/@remix-run/router/dist/router.js"}],"node_modules/react-is/cjs/react-is.development.js":[function(require,module,exports) {
+/** @license React v16.13.1
+ * react-is.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+if ("development" !== "production") {
+  (function () {
+    'use strict';
+
+    // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+    // nor polyfill, then a plain number is used for performance.
+    var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+    var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
+    var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+    var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+    var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+    var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+    var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+    var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+    // (unstable) APIs that have been removed. Can we remove the symbols?
+
+    var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
+    var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+    var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+    var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+    var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
+    var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+    var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+    var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
+    var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
+    var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
+    var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
+    function isValidElementType(type) {
+      return typeof type === 'string' || typeof type === 'function' ||
+      // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+      type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+    }
+    function typeOf(object) {
+      if (typeof object === 'object' && object !== null) {
+        var $$typeof = object.$$typeof;
+        switch ($$typeof) {
+          case REACT_ELEMENT_TYPE:
+            var type = object.type;
+            switch (type) {
+              case REACT_ASYNC_MODE_TYPE:
+              case REACT_CONCURRENT_MODE_TYPE:
+              case REACT_FRAGMENT_TYPE:
+              case REACT_PROFILER_TYPE:
+              case REACT_STRICT_MODE_TYPE:
+              case REACT_SUSPENSE_TYPE:
+                return type;
+              default:
+                var $$typeofType = type && type.$$typeof;
+                switch ($$typeofType) {
+                  case REACT_CONTEXT_TYPE:
+                  case REACT_FORWARD_REF_TYPE:
+                  case REACT_LAZY_TYPE:
+                  case REACT_MEMO_TYPE:
+                  case REACT_PROVIDER_TYPE:
+                    return $$typeofType;
+                  default:
+                    return $$typeof;
+                }
+            }
+          case REACT_PORTAL_TYPE:
+            return $$typeof;
+        }
+      }
+      return undefined;
+    } // AsyncMode is deprecated along with isAsyncMode
+
+    var AsyncMode = REACT_ASYNC_MODE_TYPE;
+    var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
+    var ContextConsumer = REACT_CONTEXT_TYPE;
+    var ContextProvider = REACT_PROVIDER_TYPE;
+    var Element = REACT_ELEMENT_TYPE;
+    var ForwardRef = REACT_FORWARD_REF_TYPE;
+    var Fragment = REACT_FRAGMENT_TYPE;
+    var Lazy = REACT_LAZY_TYPE;
+    var Memo = REACT_MEMO_TYPE;
+    var Portal = REACT_PORTAL_TYPE;
+    var Profiler = REACT_PROFILER_TYPE;
+    var StrictMode = REACT_STRICT_MODE_TYPE;
+    var Suspense = REACT_SUSPENSE_TYPE;
+    var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
+
+    function isAsyncMode(object) {
+      {
+        if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+          hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+          console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+        }
+      }
+      return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
+    }
+    function isConcurrentMode(object) {
+      return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
+    }
+    function isContextConsumer(object) {
+      return typeOf(object) === REACT_CONTEXT_TYPE;
+    }
+    function isContextProvider(object) {
+      return typeOf(object) === REACT_PROVIDER_TYPE;
+    }
+    function isElement(object) {
+      return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+    }
+    function isForwardRef(object) {
+      return typeOf(object) === REACT_FORWARD_REF_TYPE;
+    }
+    function isFragment(object) {
+      return typeOf(object) === REACT_FRAGMENT_TYPE;
+    }
+    function isLazy(object) {
+      return typeOf(object) === REACT_LAZY_TYPE;
+    }
+    function isMemo(object) {
+      return typeOf(object) === REACT_MEMO_TYPE;
+    }
+    function isPortal(object) {
+      return typeOf(object) === REACT_PORTAL_TYPE;
+    }
+    function isProfiler(object) {
+      return typeOf(object) === REACT_PROFILER_TYPE;
+    }
+    function isStrictMode(object) {
+      return typeOf(object) === REACT_STRICT_MODE_TYPE;
+    }
+    function isSuspense(object) {
+      return typeOf(object) === REACT_SUSPENSE_TYPE;
+    }
+    exports.AsyncMode = AsyncMode;
+    exports.ConcurrentMode = ConcurrentMode;
+    exports.ContextConsumer = ContextConsumer;
+    exports.ContextProvider = ContextProvider;
+    exports.Element = Element;
+    exports.ForwardRef = ForwardRef;
+    exports.Fragment = Fragment;
+    exports.Lazy = Lazy;
+    exports.Memo = Memo;
+    exports.Portal = Portal;
+    exports.Profiler = Profiler;
+    exports.StrictMode = StrictMode;
+    exports.Suspense = Suspense;
+    exports.isAsyncMode = isAsyncMode;
+    exports.isConcurrentMode = isConcurrentMode;
+    exports.isContextConsumer = isContextConsumer;
+    exports.isContextProvider = isContextProvider;
+    exports.isElement = isElement;
+    exports.isForwardRef = isForwardRef;
+    exports.isFragment = isFragment;
+    exports.isLazy = isLazy;
+    exports.isMemo = isMemo;
+    exports.isPortal = isPortal;
+    exports.isProfiler = isProfiler;
+    exports.isStrictMode = isStrictMode;
+    exports.isSuspense = isSuspense;
+    exports.isValidElementType = isValidElementType;
+    exports.typeOf = typeOf;
+  })();
+}
+},{}],"node_modules/react-is/index.js":[function(require,module,exports) {
+'use strict';
+
+if ("development" === 'production') {
+  module.exports = require('./cjs/react-is.production.min.js');
+} else {
+  module.exports = require('./cjs/react-is.development.js');
+}
+},{"./cjs/react-is.development.js":"node_modules/react-is/cjs/react-is.development.js"}],"node_modules/object-assign/index.js":[function(require,module,exports) {
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+'use strict';
+
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+function toObject(val) {
+  if (val === null || val === undefined) {
+    throw new TypeError('Object.assign cannot be called with null or undefined');
+  }
+  return Object(val);
+}
+function shouldUseNative() {
+  try {
+    if (!Object.assign) {
+      return false;
+    }
+
+    // Detect buggy property enumeration order in older V8 versions.
+
+    // https://bugs.chromium.org/p/v8/issues/detail?id=4118
+    var test1 = new String('abc'); // eslint-disable-line no-new-wrappers
+    test1[5] = 'de';
+    if (Object.getOwnPropertyNames(test1)[0] === '5') {
+      return false;
+    }
+
+    // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+    var test2 = {};
+    for (var i = 0; i < 10; i++) {
+      test2['_' + String.fromCharCode(i)] = i;
+    }
+    var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+      return test2[n];
+    });
+    if (order2.join('') !== '0123456789') {
+      return false;
+    }
+
+    // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+    var test3 = {};
+    'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+      test3[letter] = letter;
+    });
+    if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    // We don't expect any of the above to throw, but better to be safe.
+    return false;
+  }
+}
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+  var from;
+  var to = toObject(target);
+  var symbols;
+  for (var s = 1; s < arguments.length; s++) {
+    from = Object(arguments[s]);
+    for (var key in from) {
+      if (hasOwnProperty.call(from, key)) {
+        to[key] = from[key];
+      }
+    }
+    if (getOwnPropertySymbols) {
+      symbols = getOwnPropertySymbols(from);
+      for (var i = 0; i < symbols.length; i++) {
+        if (propIsEnumerable.call(from, symbols[i])) {
+          to[symbols[i]] = from[symbols[i]];
+        }
+      }
+    }
+  }
+  return to;
+};
+},{}],"node_modules/prop-types/lib/ReactPropTypesSecret.js":[function(require,module,exports) {
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+module.exports = ReactPropTypesSecret;
+
+},{}],"node_modules/prop-types/lib/has.js":[function(require,module,exports) {
+module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
+
+},{}],"node_modules/prop-types/checkPropTypes.js":[function(require,module,exports) {
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+var printWarning = function () {};
+if ("development" !== 'production') {
+  var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
+  var loggedTypeFailures = {};
+  var has = require('./lib/has');
+  printWarning = function (text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {/**/}
+  };
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  if ("development" !== 'production') {
+    for (var typeSpecName in typeSpecs) {
+      if (has(typeSpecs, typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          if (typeof typeSpecs[typeSpecName] !== 'function') {
+            var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' + 'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.');
+            err.name = 'Invariant Violation';
+            throw err;
+          }
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+        } catch (ex) {
+          error = ex;
+        }
+        if (error && !(error instanceof Error)) {
+          printWarning((componentName || 'React class') + ': type specification of ' + location + ' `' + typeSpecName + '` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a ' + typeof error + '. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).');
+        }
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+          var stack = getStack ? getStack() : '';
+          printWarning('Failed ' + location + ' type: ' + error.message + (stack != null ? stack : ''));
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Resets warning cache when testing.
+ *
+ * @private
+ */
+checkPropTypes.resetWarningCache = function () {
+  if ("development" !== 'production') {
+    loggedTypeFailures = {};
+  }
+};
+module.exports = checkPropTypes;
+},{"./lib/ReactPropTypesSecret":"node_modules/prop-types/lib/ReactPropTypesSecret.js","./lib/has":"node_modules/prop-types/lib/has.js"}],"node_modules/prop-types/factoryWithTypeCheckers.js":[function(require,module,exports) {
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+var ReactIs = require('react-is');
+var assign = require('object-assign');
+var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
+var has = require('./lib/has');
+var checkPropTypes = require('./checkPropTypes');
+var printWarning = function () {};
+if ("development" !== 'production') {
+  printWarning = function (text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+function emptyFunctionThatReturnsNull() {
+  return null;
+}
+module.exports = function (isValidElement, throwOnDirectAccess) {
+  /* global Symbol */
+  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+  /**
+   * Returns the iterator method function contained on the iterable object.
+   *
+   * Be sure to invoke the function with the iterable as context:
+   *
+   *     var iteratorFn = getIteratorFn(myIterable);
+   *     if (iteratorFn) {
+   *       var iterator = iteratorFn.call(myIterable);
+   *       ...
+   *     }
+   *
+   * @param {?object} maybeIterable
+   * @return {?function}
+   */
+  function getIteratorFn(maybeIterable) {
+    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+    if (typeof iteratorFn === 'function') {
+      return iteratorFn;
+    }
+  }
+
+  /**
+   * Collection of methods that allow declaration and validation of props that are
+   * supplied to React components. Example usage:
+   *
+   *   var Props = require('ReactPropTypes');
+   *   var MyArticle = React.createClass({
+   *     propTypes: {
+   *       // An optional string prop named "description".
+   *       description: Props.string,
+   *
+   *       // A required enum prop named "category".
+   *       category: Props.oneOf(['News','Photos']).isRequired,
+   *
+   *       // A prop named "dialog" that requires an instance of Dialog.
+   *       dialog: Props.instanceOf(Dialog).isRequired
+   *     },
+   *     render: function() { ... }
+   *   });
+   *
+   * A more formal specification of how these methods are used:
+   *
+   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+   *   decl := ReactPropTypes.{type}(.isRequired)?
+   *
+   * Each and every declaration produces a function with the same signature. This
+   * allows the creation of custom validation functions. For example:
+   *
+   *  var MyLink = React.createClass({
+   *    propTypes: {
+   *      // An optional string or URI prop named "href".
+   *      href: function(props, propName, componentName) {
+   *        var propValue = props[propName];
+   *        if (propValue != null && typeof propValue !== 'string' &&
+   *            !(propValue instanceof URI)) {
+   *          return new Error(
+   *            'Expected a string or an URI for ' + propName + ' in ' +
+   *            componentName
+   *          );
+   *        }
+   *      }
+   *    },
+   *    render: function() {...}
+   *  });
+   *
+   * @internal
+   */
+
+  var ANONYMOUS = '<<anonymous>>';
+
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+  var ReactPropTypes = {
+    array: createPrimitiveTypeChecker('array'),
+    bigint: createPrimitiveTypeChecker('bigint'),
+    bool: createPrimitiveTypeChecker('boolean'),
+    func: createPrimitiveTypeChecker('function'),
+    number: createPrimitiveTypeChecker('number'),
+    object: createPrimitiveTypeChecker('object'),
+    string: createPrimitiveTypeChecker('string'),
+    symbol: createPrimitiveTypeChecker('symbol'),
+    any: createAnyTypeChecker(),
+    arrayOf: createArrayOfTypeChecker,
+    element: createElementTypeChecker(),
+    elementType: createElementTypeTypeChecker(),
+    instanceOf: createInstanceTypeChecker,
+    node: createNodeChecker(),
+    objectOf: createObjectOfTypeChecker,
+    oneOf: createEnumTypeChecker,
+    oneOfType: createUnionTypeChecker,
+    shape: createShapeTypeChecker,
+    exact: createStrictShapeTypeChecker
+  };
+
+  /**
+   * inlined Object.is polyfill to avoid requiring consumers ship their own
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+   */
+  /*eslint-disable no-self-compare*/
+  function is(x, y) {
+    // SameValue algorithm
+    if (x === y) {
+      // Steps 1-5, 7-10
+      // Steps 6.b-6.e: +0 != -0
+      return x !== 0 || 1 / x === 1 / y;
+    } else {
+      // Step 6.a: NaN == NaN
+      return x !== x && y !== y;
+    }
+  }
+  /*eslint-enable no-self-compare*/
+
+  /**
+   * We use an Error-like object for backward compatibility as people may call
+   * PropTypes directly and inspect their output. However, we don't use real
+   * Errors anymore. We don't inspect their stack anyway, and creating them
+   * is prohibitively expensive if they are created too often, such as what
+   * happens in oneOfType() for any type before the one that matched.
+   */
+  function PropTypeError(message, data) {
+    this.message = message;
+    this.data = data && typeof data === 'object' ? data : {};
+    this.stack = '';
+  }
+  // Make `instanceof Error` still work for returned errors.
+  PropTypeError.prototype = Error.prototype;
+  function createChainableTypeChecker(validate) {
+    if ("development" !== 'production') {
+      var manualPropTypeCallCache = {};
+      var manualPropTypeWarningCount = 0;
+    }
+    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+      componentName = componentName || ANONYMOUS;
+      propFullName = propFullName || propName;
+      if (secret !== ReactPropTypesSecret) {
+        if (throwOnDirectAccess) {
+          // New behavior only for users of `prop-types` package
+          var err = new Error('Calling PropTypes validators directly is not supported by the `prop-types` package. ' + 'Use `PropTypes.checkPropTypes()` to call them. ' + 'Read more at http://fb.me/use-check-prop-types');
+          err.name = 'Invariant Violation';
+          throw err;
+        } else if ("development" !== 'production' && typeof console !== 'undefined') {
+          // Old behavior for people using React.PropTypes
+          var cacheKey = componentName + ':' + propName;
+          if (!manualPropTypeCallCache[cacheKey] &&
+          // Avoid spamming the console because they are often not actionable except for lib authors
+          manualPropTypeWarningCount < 3) {
+            printWarning('You are manually calling a React.PropTypes validation ' + 'function for the `' + propFullName + '` prop on `' + componentName + '`. This is deprecated ' + 'and will throw in the standalone `prop-types` package. ' + 'You may be seeing this warning due to a third-party PropTypes ' + 'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.');
+            manualPropTypeCallCache[cacheKey] = true;
+            manualPropTypeWarningCount++;
+          }
+        }
+      }
+      if (props[propName] == null) {
+        if (isRequired) {
+          if (props[propName] === null) {
+            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+          }
+          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+        }
+        return null;
+      } else {
+        return validate(props, propName, componentName, location, propFullName);
+      }
+    }
+    var chainedCheckType = checkType.bind(null, false);
+    chainedCheckType.isRequired = checkType.bind(null, true);
+    return chainedCheckType;
+  }
+  function createPrimitiveTypeChecker(expectedType) {
+    function validate(props, propName, componentName, location, propFullName, secret) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== expectedType) {
+        // `propValue` being instance of, say, date/regexp, pass the 'object'
+        // check, but we can offer a more precise error message here rather than
+        // 'of type `object`'.
+        var preciseType = getPreciseType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'), {
+          expectedType: expectedType
+        });
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createAnyTypeChecker() {
+    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
+  }
+  function createArrayOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+      }
+      var propValue = props[propName];
+      if (!Array.isArray(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+      }
+      for (var i = 0; i < propValue.length; i++) {
+        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
+        if (error instanceof Error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createElementTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!isValidElement(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createElementTypeTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!ReactIs.isValidElementType(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createInstanceTypeChecker(expectedClass) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!(props[propName] instanceof expectedClass)) {
+        var expectedClassName = expectedClass.name || ANONYMOUS;
+        var actualClassName = getClassName(props[propName]);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createEnumTypeChecker(expectedValues) {
+    if (!Array.isArray(expectedValues)) {
+      if ("development" !== 'production') {
+        if (arguments.length > 1) {
+          printWarning('Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' + 'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).');
+        } else {
+          printWarning('Invalid argument supplied to oneOf, expected an array.');
+        }
+      }
+      return emptyFunctionThatReturnsNull;
+    }
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      for (var i = 0; i < expectedValues.length; i++) {
+        if (is(propValue, expectedValues[i])) {
+          return null;
+        }
+      }
+      var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
+        var type = getPreciseType(value);
+        if (type === 'symbol') {
+          return String(value);
+        }
+        return value;
+      });
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + String(propValue) + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createObjectOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+      }
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+      }
+      for (var key in propValue) {
+        if (has(propValue, key)) {
+          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+          if (error instanceof Error) {
+            return error;
+          }
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createUnionTypeChecker(arrayOfTypeCheckers) {
+    if (!Array.isArray(arrayOfTypeCheckers)) {
+      "development" !== 'production' ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+      return emptyFunctionThatReturnsNull;
+    }
+    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+      var checker = arrayOfTypeCheckers[i];
+      if (typeof checker !== 'function') {
+        printWarning('Invalid argument supplied to oneOfType. Expected an array of check functions, but ' + 'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.');
+        return emptyFunctionThatReturnsNull;
+      }
+    }
+    function validate(props, propName, componentName, location, propFullName) {
+      var expectedTypes = [];
+      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+        var checker = arrayOfTypeCheckers[i];
+        var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
+        if (checkerResult == null) {
+          return null;
+        }
+        if (checkerResult.data && has(checkerResult.data, 'expectedType')) {
+          expectedTypes.push(checkerResult.data.expectedType);
+        }
+      }
+      var expectedTypesMessage = expectedTypes.length > 0 ? ', expected one of type [' + expectedTypes.join(', ') + ']' : '';
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`' + expectedTypesMessage + '.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createNodeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!isNode(props[propName])) {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function invalidValidatorError(componentName, location, propFullName, key, type) {
+    return new PropTypeError((componentName || 'React class') + ': ' + location + ' type `' + propFullName + '.' + key + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + type + '`.');
+  }
+  function createShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      for (var key in shapeTypes) {
+        var checker = shapeTypes[key];
+        if (typeof checker !== 'function') {
+          return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createStrictShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      // We need to check all keys in case some are required but missing from props.
+      var allKeys = assign({}, props[propName], shapeTypes);
+      for (var key in allKeys) {
+        var checker = shapeTypes[key];
+        if (has(shapeTypes, key) && typeof checker !== 'function') {
+          return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
+        }
+        if (!checker) {
+          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' + '\nBad object: ' + JSON.stringify(props[propName], null, '  ') + '\nValid keys: ' + JSON.stringify(Object.keys(shapeTypes), null, '  '));
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function isNode(propValue) {
+    switch (typeof propValue) {
+      case 'number':
+      case 'string':
+      case 'undefined':
+        return true;
+      case 'boolean':
+        return !propValue;
+      case 'object':
+        if (Array.isArray(propValue)) {
+          return propValue.every(isNode);
+        }
+        if (propValue === null || isValidElement(propValue)) {
+          return true;
+        }
+        var iteratorFn = getIteratorFn(propValue);
+        if (iteratorFn) {
+          var iterator = iteratorFn.call(propValue);
+          var step;
+          if (iteratorFn !== propValue.entries) {
+            while (!(step = iterator.next()).done) {
+              if (!isNode(step.value)) {
+                return false;
+              }
+            }
+          } else {
+            // Iterator will provide entry [k,v] tuples rather than values.
+            while (!(step = iterator.next()).done) {
+              var entry = step.value;
+              if (entry) {
+                if (!isNode(entry[1])) {
+                  return false;
+                }
+              }
+            }
+          }
+        } else {
+          return false;
+        }
+        return true;
+      default:
+        return false;
+    }
+  }
+  function isSymbol(propType, propValue) {
+    // Native Symbol.
+    if (propType === 'symbol') {
+      return true;
+    }
+
+    // falsy value can't be a Symbol
+    if (!propValue) {
+      return false;
+    }
+
+    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+    if (propValue['@@toStringTag'] === 'Symbol') {
+      return true;
+    }
+
+    // Fallback for non-spec compliant Symbols which are polyfilled.
+    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+      return true;
+    }
+    return false;
+  }
+
+  // Equivalent of `typeof` but with special handling for array and regexp.
+  function getPropType(propValue) {
+    var propType = typeof propValue;
+    if (Array.isArray(propValue)) {
+      return 'array';
+    }
+    if (propValue instanceof RegExp) {
+      // Old webkits (at least until Android 4.0) return 'function' rather than
+      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+      // passes PropTypes.object.
+      return 'object';
+    }
+    if (isSymbol(propType, propValue)) {
+      return 'symbol';
+    }
+    return propType;
+  }
+
+  // This handles more types than `getPropType`. Only used for error messages.
+  // See `createPrimitiveTypeChecker`.
+  function getPreciseType(propValue) {
+    if (typeof propValue === 'undefined' || propValue === null) {
+      return '' + propValue;
+    }
+    var propType = getPropType(propValue);
+    if (propType === 'object') {
+      if (propValue instanceof Date) {
+        return 'date';
+      } else if (propValue instanceof RegExp) {
+        return 'regexp';
+      }
+    }
+    return propType;
+  }
+
+  // Returns a string that is postfixed to a warning about an invalid type.
+  // For example, "undefined" or "of type array"
+  function getPostfixForTypeWarning(value) {
+    var type = getPreciseType(value);
+    switch (type) {
+      case 'array':
+      case 'object':
+        return 'an ' + type;
+      case 'boolean':
+      case 'date':
+      case 'regexp':
+        return 'a ' + type;
+      default:
+        return type;
+    }
+  }
+
+  // Returns class name of the object, if any.
+  function getClassName(propValue) {
+    if (!propValue.constructor || !propValue.constructor.name) {
+      return ANONYMOUS;
+    }
+    return propValue.constructor.name;
+  }
+  ReactPropTypes.checkPropTypes = checkPropTypes;
+  ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+  return ReactPropTypes;
+};
+},{"react-is":"node_modules/react-is/index.js","object-assign":"node_modules/object-assign/index.js","./lib/ReactPropTypesSecret":"node_modules/prop-types/lib/ReactPropTypesSecret.js","./lib/has":"node_modules/prop-types/lib/has.js","./checkPropTypes":"node_modules/prop-types/checkPropTypes.js"}],"node_modules/prop-types/index.js":[function(require,module,exports) {
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if ("development" !== 'production') {
+  var ReactIs = require('react-is');
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = require('./factoryWithTypeCheckers')(ReactIs.isElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = require('./factoryWithThrowingShims')();
+}
+},{"react-is":"node_modules/react-is/index.js","./factoryWithTypeCheckers":"node_modules/prop-types/factoryWithTypeCheckers.js"}],"node_modules/react-shimmer-effects/dist/index.es.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Title = void 0;
-var _react = _interopRequireWildcard(require("react"));
-var _titleLogo = _interopRequireDefault(require("../img/titleLogo.png"));
-var _reactRouterDom = require("react-router-dom");
+exports.ShimmerTitle = exports.ShimmerThumbnail = exports.ShimmerText = exports.ShimmerTableRow = exports.ShimmerTableCol = exports.ShimmerTable = exports.ShimmerSocialPost = exports.ShimmerSimpleGallery = exports.ShimmerSeparator = exports.ShimmerSectionHeader = exports.ShimmerPostList = exports.ShimmerPostItem = exports.ShimmerPostDetails = exports.ShimmerFeaturedGallery = exports.ShimmerContentBlock = exports.ShimmerCircularImage = exports.ShimmerCategoryList = exports.ShimmerCategoryItem = exports.ShimmerCard = exports.ShimmerButton = exports.ShimmerBadge = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw new Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator.return && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw new Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, catch: function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-function filterData(searchText, restaurant) {
-  var arr = [];
-  for (var i = 0; i < restaurant.length; i++) {
-    if (restaurant[i].info.name.includes(searchText)) {
-      arr.push(restaurant[i]);
-    }
-  }
-  return arr;
+function createCommonjsModule(fn, module) {
+  return module = {
+    exports: {}
+  }, fn(module, module.exports), module.exports;
 }
-var Title = exports.Title = function Title() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("a", {
-    href: "/"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: _titleLogo.default,
-    alt: "Logo Image",
-    id: "LogoImg"
+var classnames = createCommonjsModule(function (module) {
+  /*!
+    Copyright (c) 2018 Jed Watson.
+    Licensed under the MIT License (MIT), see
+    http://jedwatson.github.io/classnames
+  */
+  /* global define */
+
+  (function () {
+    var hasOwn = {}.hasOwnProperty;
+    function classNames() {
+      var classes = [];
+      for (var i = 0; i < arguments.length; i++) {
+        var arg = arguments[i];
+        if (!arg) continue;
+        var argType = _typeof(arg);
+        if (argType === 'string' || argType === 'number') {
+          classes.push(arg);
+        } else if (Array.isArray(arg)) {
+          if (arg.length) {
+            var inner = classNames.apply(null, arg);
+            if (inner) {
+              classes.push(inner);
+            }
+          }
+        } else if (argType === 'object') {
+          if (arg.toString === Object.prototype.toString) {
+            for (var key in arg) {
+              if (hasOwn.call(arg, key) && arg[key]) {
+                classes.push(key);
+              }
+            }
+          } else {
+            classes.push(arg.toString());
+          }
+        }
+      }
+      return classes.join(' ');
+    }
+    if (module.exports) {
+      classNames.default = classNames;
+      module.exports = classNames;
+    } else {
+      window.classNames = classNames;
+    }
+  })();
+});
+function styleInject(css, ref) {
+  if (ref === void 0) ref = {};
+  var insertAt = ref.insertAt;
+  if (!css || typeof document === 'undefined') {
+    return;
+  }
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+var css = ".shimmer-button {\n  border-radius: 4px;\n  height: 38px;\n  width: 120px;\n  margin-bottom: 20px; }\n  .shimmer-button--sm {\n    border-radius: 3px;\n    height: 31px;\n    width: 100px; }\n  .shimmer-button--lg {\n    height: 48px;\n    width: 140px;\n    border-radius: 5px; }\n";
+styleInject(css);
+var defineProperty = function defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+};
+var ShimmerButton = exports.ShimmerButton = function ShimmerButton(_ref) {
+  var size = _ref.size;
+  return _react.default.createElement("div", {
+    className: classnames(defineProperty({
+      "shimmer shimmer-button": true
+    }, "shimmer-button--" + size, true))
+  });
+};
+ShimmerButton.propTypes = {
+  size: _propTypes.default.oneOf(["lg", "md", "sm"])
+};
+ShimmerButton.defaultProps = {
+  size: "md"
+};
+var ShimmerCircularImage = exports.ShimmerCircularImage = function ShimmerCircularImage(_ref) {
+  var size = _ref.size,
+    center = _ref.center,
+    className = _ref.className;
+  var style = {};
+  if (size) {
+    style.width = size + "px";
+    style.height = size + "px";
+  }
+  return _react.default.createElement("div", {
+    className: classnames({
+      "text-center": center
+    })
+  }, _react.default.createElement("div", {
+    style: style,
+    className: classnames(defineProperty({
+      "shimmer shimmer-avatar": true
+    }, className, className))
+  }));
+};
+ShimmerCircularImage.propTypes = {
+  size: _propTypes.default.number,
+  center: _propTypes.default.bool,
+  className: _propTypes.default.string
+};
+ShimmerCircularImage.defaultProps = {
+  center: false,
+  size: 80
+};
+var ShimmerThumbnail = exports.ShimmerThumbnail = function ShimmerThumbnail(_ref) {
+  var height = _ref.height,
+    width = _ref.width,
+    center = _ref.center,
+    className = _ref.className,
+    fitOnFrame = _ref.fitOnFrame,
+    rounded = _ref.rounded;
+  var style = {};
+  if (height) style.height = height + "px";
+  if (width) style.width = width + "px";
+  return _react.default.createElement("div", {
+    className: classnames({
+      "h-100": fitOnFrame,
+      "text-center ": center
+    })
+  }, _react.default.createElement("div", {
+    className: classnames(defineProperty({
+      "h-100": fitOnFrame,
+      "shimmer shimmer-thumbnail": true,
+      "border-rounded": rounded
+    }, className, className)),
+    style: style
+  }));
+};
+ShimmerThumbnail.propTypes = {
+  height: _propTypes.default.number,
+  width: _propTypes.default.number,
+  center: _propTypes.default.bool,
+  className: _propTypes.default.string,
+  fitOnFrame: _propTypes.default.bool,
+  rounded: _propTypes.default.bool
+};
+ShimmerThumbnail.defaultProps = {
+  canter: false,
+  fitOnFrame: false,
+  rounded: false,
+  height: 250
+};
+var css$1 = ".shimmer-avatar {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n  margin-bottom: 20px;\n  display: inline-block; }\n\n.shimmer-thumbnail {\n  min-width: 80px;\n  width: 100%;\n  height: 200px;\n  margin-bottom: 20px;\n  display: inline-block; }\n";
+styleInject(css$1);
+var css$2 = ".shimmer-title {\n  margin-bottom: 20px; }\n  .shimmer-title--secondary {\n    margin-bottom: 20px; }\n    .shimmer-title--secondary .shimmer-title-line {\n      height: 16px; }\n  .shimmer-title-line {\n    width: 100%;\n    height: 24px;\n    border-radius: 20px; }\n    .shimmer-title-line:first-child {\n      width: 100% !important; }\n    .shimmer-title-line:last-child {\n      width: 40%; }\n";
+styleInject(css$2);
+var ShimmerTitle = exports.ShimmerTitle = function ShimmerTitle(_ref) {
+  var _classNames;
+  var line = _ref.line,
+    gap = _ref.gap,
+    variant = _ref.variant,
+    className = _ref.className;
+  var renderLines = function renderLines() {
+    var title_lines = [];
+    for (var index = 0; index < line; index++) {
+      title_lines.push(_react.default.createElement("div", {
+        className: "shimmer shimmer-title-line",
+        key: index
+      }));
+    }
+    return title_lines;
+  };
+  return _react.default.createElement("div", {
+    className: classnames((_classNames = {
+      grid: true,
+      "shimmer-title": variant === "primary",
+      "shimmer-title--secondary": variant === "secondary"
+    }, defineProperty(_classNames, "grid-gap-" + gap, gap), defineProperty(_classNames, className, className), _classNames))
+  }, renderLines());
+};
+ShimmerTitle.propTypes = {
+  line: _propTypes.default.number,
+  gap: _propTypes.default.oneOf([10, 15, 20, 30]),
+  variant: _propTypes.default.oneOf(["primary", "secondary"]),
+  className: _propTypes.default.string
+};
+ShimmerTitle.defaultProps = {
+  line: 2,
+  gap: 10,
+  variant: "primary"
+};
+var css$3 = ".shimmer-card {\n  border-radius: 8px;\n  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);\n  background-color: #ffffff;\n  width: 100%; }\n  .shimmer-card:not(:first-child) {\n    margin-top: 30px; }\n  .shimmer-card--content-center {\n    text-align: center;\n    display: flex;\n    flex-direction: column;\n    align-items: center; }\n    .shimmer-card--content-center * {\n      width: 100%;\n      margin: auto; }\n";
+styleInject(css$3);
+var ShimmerCard = exports.ShimmerCard = function ShimmerCard(_ref) {
+  var _classNames;
+  var children = _ref.children,
+    className = _ref.className,
+    paddingSize = _ref.paddingSize;
+  if (!children) return null;
+  return _react.default.createElement("div", {
+    className: classnames((_classNames = {
+      "shimmer-card": true
+    }, defineProperty(_classNames, "p-" + paddingSize, paddingSize), defineProperty(_classNames, className, className), _classNames))
+  }, children);
+};
+ShimmerCard.propTypes = {
+  className: _propTypes.default.string,
+  children: _propTypes.default.oneOfType([_propTypes.default.element, _propTypes.default.array]).isRequired,
+  paddingSize: _propTypes.default.oneOf([false, 20, 30])
+};
+ShimmerCard.defaultProps = {
+  paddingSize: false
+};
+var ShimmerSimpleGallery = exports.ShimmerSimpleGallery = function ShimmerSimpleGallery(_ref) {
+  var _classNames, _classNames2;
+  var row = _ref.row,
+    col = _ref.col,
+    gap = _ref.gap,
+    className = _ref.className,
+    fitOnFrame = _ref.fitOnFrame,
+    imageType = _ref.imageType,
+    imageHeight = _ref.imageHeight,
+    caption = _ref.caption,
+    card = _ref.card;
+  var renderPhotos = function renderPhotos() {
+    var photos = [];
+    var items = row * col;
+    for (var index = 0; index < items; index++) {
+      photos.push(_react.default.createElement("div", {
+        key: index
+      }, imageType === "thumbnail" && _react.default.createElement(ShimmerThumbnail, {
+        key: index,
+        fitOnFrame: fitOnFrame,
+        height: imageHeight,
+        className: classnames({
+          "m-0": true
+        })
+      }), imageType === "circular" && _react.default.createElement(ShimmerCircularImage, {
+        size: imageHeight,
+        center: true
+      }), caption && _react.default.createElement(ShimmerTitle, {
+        variant: "secondary",
+        className: classnames({
+          "mt-15": imageType === "thumbnail",
+          "w-50 ml-auto mr-auto circular-image-caption": imageType === "circular"
+        })
+      })));
+    }
+    return photos;
+  };
+  if (!card) return _react.default.createElement("div", {
+    className: classnames((_classNames = {
+      grid: true
+    }, defineProperty(_classNames, "grid-gap-" + gap, true), defineProperty(_classNames, "grid-column-" + col, true), defineProperty(_classNames, className, className), _classNames))
+  }, renderPhotos());
+  return _react.default.createElement(ShimmerCard, {
+    paddingSize: 20
+  }, _react.default.createElement("div", {
+    className: classnames((_classNames2 = {
+      grid: true
+    }, defineProperty(_classNames2, "grid-gap-" + gap, true), defineProperty(_classNames2, "grid-column-" + col, true), defineProperty(_classNames2, className, className), _classNames2))
+  }, renderPhotos()));
+};
+ShimmerSimpleGallery.propTypes = {
+  row: _propTypes.default.number,
+  col: _propTypes.default.oneOf([2, 3, 4]),
+  gap: _propTypes.default.oneOf([20, 30]),
+  fitOnFrame: _propTypes.default.bool,
+  imageType: _propTypes.default.oneOf(["thumbnail", "circular"]),
+  imageHeight: _propTypes.default.number,
+  caption: _propTypes.default.bool,
+  card: _propTypes.default.bool
+};
+ShimmerSimpleGallery.defaultProps = {
+  row: 3,
+  col: 3,
+  gap: 20,
+  fitOnFrame: false,
+  imageType: "thumbnail",
+  caption: false,
+  card: false
+};
+var css$4 = ".shimmer-gallery-puzzle {\n  height: 540px; }\n\n.circular-image-caption .shimmer-title-line {\n  margin: auto; }\n";
+styleInject(css$4);
+var ShimmerFeaturedGallery = exports.ShimmerFeaturedGallery = function ShimmerFeaturedGallery(_ref) {
+  var row = _ref.row,
+    col = _ref.col,
+    gap = _ref.gap,
+    card = _ref.card,
+    frameHeight = _ref.frameHeight;
+  var style = {};
+  if (frameHeight) style.height = frameHeight + "px";
+  var renderContent = function renderContent() {
+    return _react.default.createElement("div", {
+      className: "shimmer-row shimmer-gallery-puzzle",
+      style: style
+    }, _react.default.createElement("div", {
+      className: "shimmer-col flex-1"
+    }, _react.default.createElement(ShimmerThumbnail, {
+      className: "h-100",
+      fitOnFrame: true
+    })), _react.default.createElement("div", {
+      className: "shimmer-col flex-1"
+    }, _react.default.createElement(ShimmerSimpleGallery, {
+      row: row,
+      col: col,
+      gap: gap,
+      className: "h-100",
+      fitOnFrame: true
+    })));
+  };
+  if (!card) return renderContent();
+  return _react.default.createElement(ShimmerCard, {
+    paddingSize: 20
+  }, renderContent());
+};
+ShimmerFeaturedGallery.propTypes = {
+  row: _propTypes.default.number,
+  col: _propTypes.default.oneOf([2, 3, 4]),
+  gap: _propTypes.default.oneOf([20, 30]),
+  card: _propTypes.default.bool,
+  frameHeight: _propTypes.default.number
+};
+ShimmerFeaturedGallery.defaultProps = {
+  card: false,
+  row: 2,
+  col: 2,
+  gap: 20,
+  frameHeight: 600
+};
+var ShimmerTableCol = exports.ShimmerTableCol = function ShimmerTableCol() {
+  return _react.default.createElement("div", {
+    className: "shimmer shimmer-table-col"
+  });
+};
+var ShimmerTableRow = exports.ShimmerTableRow = function ShimmerTableRow(_ref) {
+  var col = _ref.col,
+    header = _ref.header;
+  var renderColumns = function renderColumns() {
+    var columns = [];
+    for (var index = 0; index < col; index++) {
+      columns.push(_react.default.createElement(ShimmerTableCol, {
+        key: index
+      }));
+    }
+    return columns;
+  };
+  return _react.default.createElement("div", {
+    className: classnames({
+      "shimmer-table-row": true,
+      "shimmer-table-row--header": header
+    })
+  }, renderColumns());
+};
+ShimmerTableRow.propTypes = {
+  col: _propTypes.default.number.isRequired,
+  header: _propTypes.default.bool
+};
+ShimmerTableRow.defaultProps = {
+  col: 5,
+  header: false
+};
+var css$5 = ".shimmer-table-row {\n  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);\n  display: flex;\n  padding: 25px 0;\n  background-color: #ffffff;\n  border-radius: 5px;\n  margin-bottom: 20px; }\n  .shimmer-table-row--header {\n    background-color: transparent;\n    box-shadow: none;\n    margin: 0; }\n  .shimmer-table-row > .shimmer {\n    margin: 0 30px; }\n\n.shimmer-table-col {\n  width: 100%;\n  height: 10px;\n  border-radius: 10px; }\n";
+styleInject(css$5);
+var ShimmerTable = exports.ShimmerTable = function ShimmerTable(_ref) {
+  var row = _ref.row,
+    col = _ref.col;
+  var renderRows = function renderRows() {
+    var rows = [];
+    for (var index = 0; index < row; index++) {
+      rows.push(_react.default.createElement(ShimmerTableRow, {
+        col: col,
+        key: index
+      }));
+    }
+    return rows;
+  };
+  return _react.default.createElement("div", null, _react.default.createElement(ShimmerTableRow, {
+    col: col,
+    header: true
+  }), renderRows());
+};
+ShimmerTable.propTypes = {
+  row: _propTypes.default.number,
+  col: _propTypes.default.number
+};
+ShimmerTable.defaultProps = {
+  row: 5,
+  col: 5
+};
+var css$6 = ".shimmer-badge {\n  width: 80px;\n  height: 24px;\n  border-radius: 20px;\n  margin-bottom: 20px; }\n";
+styleInject(css$6);
+var ShimmerBadge = exports.ShimmerBadge = function ShimmerBadge(_ref) {
+  var width = _ref.width;
+  var style = {};
+  if (width) style.width = width + "px";
+  return _react.default.createElement("div", {
+    className: "shimmer shimmer-badge",
+    style: style
+  });
+};
+ShimmerBadge.propTypes = {
+  width: _propTypes.default.number
+};
+var css$7 = ".shimmer-text {\n  margin-bottom: 30px; }\n  .shimmer-text-line {\n    width: 100%;\n    height: 8px;\n    border-radius: 10px; }\n    .shimmer-text-line:first-child {\n      width: 100% !important; }\n    .shimmer-text-line:last-child {\n      width: 40%; }\n";
+styleInject(css$7);
+var ShimmerText = exports.ShimmerText = function ShimmerText(_ref) {
+  var _classNames;
+  var line = _ref.line,
+    gap = _ref.gap,
+    className = _ref.className;
+  var renderLines = function renderLines() {
+    var text_lines = [];
+    for (var index = 0; index < line; index++) {
+      text_lines.push(_react.default.createElement("div", {
+        className: "shimmer shimmer-text-line",
+        key: index
+      }));
+    }
+    return text_lines;
+  };
+  return _react.default.createElement("div", {
+    className: classnames((_classNames = {
+      "grid shimmer-text": true
+    }, defineProperty(_classNames, "grid-gap-" + gap, gap), defineProperty(_classNames, className, className), _classNames))
+  }, renderLines());
+};
+ShimmerText.propTypes = {
+  line: _propTypes.default.number,
+  gap: _propTypes.default.oneOf([10, 15, 20, 30]),
+  className: _propTypes.default.string
+};
+ShimmerText.defaultProps = {
+  line: 5,
+  gap: 15
+};
+var css$8 = ".shimmer-separator {\n  height: 1px;\n  background-color: #dddddd;\n  margin: 40px 0; }\n";
+styleInject(css$8);
+var ShimmerSeparator = exports.ShimmerSeparator = function ShimmerSeparator() {
+  return _react.default.createElement("div", {
+    className: "shimmer-separator"
+  });
+};
+var ShimmerSocialPost = exports.ShimmerSocialPost = function ShimmerSocialPost(_ref) {
+  var type = _ref.type,
+    title = _ref.title;
+  var renderContents = function renderContents() {
+    if (type === "image") {
+      return _react.default.createElement(ShimmerThumbnail, {
+        height: 300,
+        className: "m-02"
+      });
+    } else if (type === "text") {
+      return _react.default.createElement(ShimmerText, {
+        line: 13,
+        className: "p-15"
+      });
+    } else {
+      return _react.default.createElement("div", null, _react.default.createElement(ShimmerText, {
+        line: 3,
+        className: "p-15"
+      }), _react.default.createElement(ShimmerThumbnail, {
+        height: 300,
+        className: "m-02"
+      }));
+    }
+  };
+  return _react.default.createElement(ShimmerCard, null, _react.default.createElement("div", {
+    className: "p-15"
+  }, _react.default.createElement("div", {
+    className: "flex"
+  }, _react.default.createElement(ShimmerCircularImage, null), _react.default.createElement("div", {
+    className: "flex-1 p-15"
+  }, _react.default.createElement(ShimmerTitle, {
+    variant: "secondary",
+    className: "w-40"
+  }))), title && _react.default.createElement(ShimmerTitle, {
+    line: 1,
+    className: "w-40 m-0"
+  })), renderContents(), _react.default.createElement("div", {
+    className: "p-15 flex flex-content-between"
+  }, _react.default.createElement(ShimmerTitle, {
+    line: 1,
+    className: "w-10",
+    variant: "secondary"
+  }), _react.default.createElement(ShimmerTitle, {
+    line: 1,
+    className: "w-10",
+    variant: "secondary"
   })));
 };
-var Header = function Header(_ref) {
-  var setrestData = _ref.setrestData;
-  var _useState = (0, _react.useState)(),
-    _useState2 = _slicedToArray(_useState, 2),
-    restaurant = _useState2[0],
-    setRestaurant = _useState2[1];
-  //searchText is a local state variable
-  var _useState3 = (0, _react.useState)(),
-    _useState4 = _slicedToArray(_useState3, 2),
-    searchText = _useState4[0],
-    setsearchText = _useState4[1];
-  (0, _react.useEffect)(function () {
-    getRestaurant();
-  }, []);
-  var getRestaurant = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var data, json, checkJsonData, _checkJsonData, resData;
-      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-        while (1) switch (_context2.prev = _context2.next) {
-          case 0:
-            _checkJsonData = function _checkJsonData3() {
-              _checkJsonData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(jsonData) {
-                var i, _jsonData$data, _json$data, checkData;
-                return _regeneratorRuntime().wrap(function _callee$(_context) {
-                  while (1) switch (_context.prev = _context.next) {
-                    case 0:
-                      i = 0;
-                    case 1:
-                      if (!(i < (jsonData === null || jsonData === void 0 || (_jsonData$data = jsonData.data) === null || _jsonData$data === void 0 ? void 0 : _jsonData$data.cards.length))) {
-                        _context.next = 8;
-                        break;
-                      }
-                      // initialize checkData for Swiggy Restaurant data
-                      checkData = json === null || json === void 0 || (_json$data = json.data) === null || _json$data === void 0 || (_json$data = _json$data.cards[i]) === null || _json$data === void 0 || (_json$data = _json$data.card) === null || _json$data === void 0 || (_json$data = _json$data.card) === null || _json$data === void 0 || (_json$data = _json$data.gridElements) === null || _json$data === void 0 || (_json$data = _json$data.infoWithStyle) === null || _json$data === void 0 ? void 0 : _json$data.restaurants; // if checkData is not undefined then return it
-                      if (!(checkData !== undefined)) {
-                        _context.next = 5;
-                        break;
-                      }
-                      return _context.abrupt("return", checkData);
-                    case 5:
-                      i++;
-                      _context.next = 1;
-                      break;
-                    case 8:
-                    case "end":
-                      return _context.stop();
-                  }
-                }, _callee);
-              }));
-              return _checkJsonData.apply(this, arguments);
-            };
-            checkJsonData = function _checkJsonData2(_x) {
-              return _checkJsonData.apply(this, arguments);
-            };
-            _context2.next = 4;
-            return fetch("https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING");
-          case 4:
-            data = _context2.sent;
-            _context2.next = 7;
-            return data.json();
-          case 7:
-            json = _context2.sent;
-            _context2.next = 10;
-            return checkJsonData(json);
-          case 10:
-            resData = _context2.sent;
-            setrestData(resData);
-            setRestaurant(resData);
-          case 13:
-          case "end":
-            return _context2.stop();
-        }
-      }, _callee2);
-    }));
-    return function getRestaurant() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "header"
-  }, /*#__PURE__*/_react.default.createElement(Title, null), /*#__PURE__*/_react.default.createElement("div", {
-    className: "nav-items"
-  }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/",
-    className: "active"
-  }, "Home")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/about"
-  }, "About")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/contact"
-  }, "Contact")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
-    href: ""
-  }, "Cart")))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "SearchItem"
-  }, /*#__PURE__*/_react.default.createElement("form", {
-    action: ""
-  }, /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
-    name: "",
-    id: "Searchinput",
-    placeholder: "Search Your Item",
-    value: searchText,
-    onChange: function onChange(e) {
-      setsearchText(e.target.value);
-    }
-  }), /*#__PURE__*/_react.default.createElement("button", {
-    type: "submit",
-    id: "input-btn",
-    onClick: function onClick(e) {
-      e.preventDefault();
-      var data = filterData(searchText, restaurant);
-      setrestData(data);
-    }
-  }, "SEARCH"))));
+ShimmerSocialPost.propTypes = {
+  type: _propTypes.default.oneOf(["text", "image", "both"]),
+  title: _propTypes.default.bool
 };
-var _default = exports.default = Header;
-},{"react":"node_modules/react/index.js","../img/titleLogo.png":"img/titleLogo.png","react-router-dom":"node_modules/react-router-dom/dist/index.js"}],"img/loading.webp":[function(require,module,exports) {
-module.exports = "/loading.e810ebf9.webp";
-},{}],"utils/Shimmer.js":[function(require,module,exports) {
+ShimmerSocialPost.defaultProps = {
+  type: "image",
+  title: false
+};
+var ShimmerCategoryItem = exports.ShimmerCategoryItem = function ShimmerCategoryItem(_ref) {
+  var hasImage = _ref.hasImage,
+    imageType = _ref.imageType,
+    imageWidth = _ref.imageWidth,
+    imageHeight = _ref.imageHeight,
+    title = _ref.title,
+    text = _ref.text,
+    cta = _ref.cta,
+    contentCenter = _ref.contentCenter;
+  return _react.default.createElement("div", null, !hasImage ? _react.default.createElement("div", null, _react.default.createElement(ShimmerTitle, {
+    variant: "secondary",
+    line: 1,
+    className: "mb-15 w-80"
+  }), _react.default.createElement("div", {
+    className: "w-40"
+  }, _react.default.createElement(ShimmerText, {
+    line: 3,
+    gap: 10
+  }))) : _react.default.createElement("div", {
+    className: classnames({
+      flex: true,
+      "flex-vertical-center": contentCenter
+    })
+  }, imageType === "thumbnail" && _react.default.createElement(ShimmerThumbnail, {
+    width: imageWidth,
+    height: imageHeight
+  }), imageType === "circular" && _react.default.createElement(ShimmerCircularImage, {
+    size: imageWidth
+  }), _react.default.createElement("div", {
+    className: "flex-1 p-15"
+  }, title && _react.default.createElement(ShimmerTitle, {
+    variant: "secondary"
+  }), text && _react.default.createElement(ShimmerText, {
+    line: 3,
+    gap: 10,
+    className: "mb-20"
+  }), cta && _react.default.createElement(ShimmerButton, {
+    size: "sm"
+  }))));
+};
+ShimmerCategoryItem.propTypes = {
+  hasImage: _propTypes.default.bool.isRequired,
+  imageType: _propTypes.default.oneOf(["circular", "thumbnail"]),
+  imageWidth: _propTypes.default.number,
+  imageHeight: _propTypes.default.number,
+  title: _propTypes.default.bool,
+  text: _propTypes.default.bool,
+  cta: _propTypes.default.bool,
+  contentCenter: _propTypes.default.bool
+};
+ShimmerCategoryItem.defaultProps = {
+  hasImage: false,
+  imageType: "thumbnail",
+  title: false,
+  text: false,
+  contentCenter: false
+};
+var ShimmerCategoryList = exports.ShimmerCategoryList = function ShimmerCategoryList(_ref) {
+  var items = _ref.items,
+    categoryStyle = _ref.categoryStyle,
+    title = _ref.title;
+  var categories = {
+    STYLE_ONE: _react.default.createElement(ShimmerCategoryItem, null),
+    STYLE_TWO: _react.default.createElement(ShimmerCategoryItem, {
+      hasImage: true,
+      imageType: "thumbnail",
+      imageWidth: 100,
+      imageHeight: 100,
+      title: true
+    }),
+    STYLE_THREE: _react.default.createElement(ShimmerCategoryItem, {
+      hasImage: true,
+      imageType: "circular",
+      imageWidth: 100,
+      imageHeight: 100,
+      title: true
+    }),
+    STYLE_FOUR: _react.default.createElement(ShimmerCategoryItem, {
+      hasImage: true,
+      imageType: "thumbnail",
+      imageWidth: 100,
+      imageHeight: 100,
+      text: true
+    }),
+    STYLE_FIVE: _react.default.createElement(ShimmerCategoryItem, {
+      hasImage: true,
+      imageType: "circular",
+      imageWidth: 100,
+      imageHeight: 100,
+      text: true
+    }),
+    STYLE_SIX: _react.default.createElement(ShimmerCategoryItem, {
+      hasImage: true,
+      imageType: "thumbnail",
+      imageWidth: 100,
+      imageHeight: 100,
+      text: true,
+      cta: true
+    }),
+    STYLE_SEVEN: _react.default.createElement(ShimmerCategoryItem, {
+      hasImage: true,
+      imageType: "circular",
+      imageWidth: 100,
+      imageHeight: 100,
+      text: true,
+      cta: true
+    })
+  };
+  var renderItems = function renderItems() {
+    var list = [];
+    for (var index = 0; index < items; index++) {
+      list.push(_react.default.createElement("div", {
+        key: index
+      }, categories[categoryStyle]));
+    }
+    return list;
+  };
+  return _react.default.createElement(ShimmerCard, {
+    paddingSize: 20
+  }, title && _react.default.createElement(ShimmerTitle, {
+    line: 1,
+    className: "w-60"
+  }), renderItems());
+};
+ShimmerCategoryList.propTypes = {
+  title: _propTypes.default.bool,
+  items: _propTypes.default.number,
+  categoryStyle: _propTypes.default.oneOf(["STYLE_ONE", "STYLE_TWO", "STYLE_THREE", "STYLE_FOUR", "STYLE_FIVE", "STYLE_SIX", "STYLE_SEVEN"])
+};
+ShimmerCategoryList.defaultProps = {
+  title: false,
+  items: 5,
+  categoryStyle: "STYLE_ONE"
+};
+var ShimmerPostDetails = exports.ShimmerPostDetails = function ShimmerPostDetails(_ref) {
+  var variant = _ref.variant,
+    cta = _ref.cta,
+    card = _ref.card;
+  var variants = {
+    SIMPLE: _react.default.createElement("div", null, _react.default.createElement(ShimmerTitle, {
+      line: 1,
+      className: "w-40"
+    }), _react.default.createElement(ShimmerTitle, {
+      line: 1,
+      variant: "secondary",
+      className: "w-20 mb-40"
+    }), _react.default.createElement("div", {
+      className: "w-40 mb-40"
+    }, _react.default.createElement(ShimmerText, {
+      line: 1,
+      className: "mb-15 w-20"
+    }), _react.default.createElement(ShimmerText, {
+      line: 1,
+      className: "mb-15 w-40"
+    }), _react.default.createElement(ShimmerText, {
+      line: 1,
+      className: "mb-30 w-60"
+    })), _react.default.createElement(ShimmerTitle, {
+      line: 1,
+      variant: "secondary",
+      className: "w-30"
+    }), _react.default.createElement(ShimmerText, {
+      className: "mb-40"
+    }), _react.default.createElement(ShimmerTitle, {
+      line: 1,
+      variant: "secondary",
+      className: "w-30"
+    }), _react.default.createElement(ShimmerText, {
+      className: "mb-40"
+    }), _react.default.createElement(ShimmerTitle, {
+      line: 1,
+      variant: "secondary",
+      className: "w-30"
+    }), _react.default.createElement(ShimmerText, {
+      className: "mb-40"
+    }), _react.default.createElement(ShimmerTitle, {
+      line: 1,
+      variant: "secondary",
+      className: "w-30"
+    }), _react.default.createElement(ShimmerText, {
+      className: "mb-40"
+    }), cta && _react.default.createElement(ShimmerButton, null)),
+    EDITOR: _react.default.createElement("div", null, _react.default.createElement(ShimmerTitle, {
+      line: 1,
+      className: "w-40"
+    }), _react.default.createElement(ShimmerThumbnail, {
+      height: 400
+    }), _react.default.createElement(ShimmerText, null), _react.default.createElement(ShimmerText, null), _react.default.createElement("div", {
+      className: "shimmer-row"
+    }, _react.default.createElement("div", {
+      className: "shimmer-col"
+    }, _react.default.createElement(ShimmerText, {
+      line: 13
+    })), _react.default.createElement("div", {
+      className: "shimmer-col"
+    }, _react.default.createElement(ShimmerThumbnail, {
+      height: 300
+    }))), _react.default.createElement(ShimmerText, null), _react.default.createElement(ShimmerText, null), _react.default.createElement(ShimmerText, null))
+  };
+  if (!card) return variants[variant];
+  return _react.default.createElement(ShimmerCard, {
+    paddingSize: 30
+  }, variants[variant]);
+};
+ShimmerPostDetails.propTypes = {
+  variant: _propTypes.default.oneOf(["SIMPLE", "EDITOR"]),
+  cta: _propTypes.default.bool,
+  card: _propTypes.default.bool
+};
+ShimmerPostDetails.defaultProps = {
+  variant: "SIMPLE",
+  cta: false,
+  card: false
+};
+var ShimmerPostItem = exports.ShimmerPostItem = function ShimmerPostItem(_ref) {
+  var cta = _ref.cta,
+    title = _ref.title,
+    text = _ref.text,
+    imageType = _ref.imageType,
+    imageWidth = _ref.imageWidth,
+    imageHeight = _ref.imageHeight;
+  return _react.default.createElement(ShimmerCard, null, imageType === "thumbnail" && _react.default.createElement(ShimmerThumbnail, {
+    height: imageHeight,
+    width: imageWidth,
+    className: imageWidth && imageWidth !== "w-100" ? "m-30 mb-0" : "mb-0"
+  }), imageType === "circular" && _react.default.createElement(ShimmerCircularImage, {
+    size: imageWidth,
+    className: "m-30 mb-0"
+  }), _react.default.createElement("div", {
+    className: "p-30"
+  }, title && _react.default.createElement(ShimmerTitle, {
+    variant: "secondary"
+  }), text && _react.default.createElement(ShimmerText, {
+    line: 3,
+    gap: 10
+  }), cta && _react.default.createElement(ShimmerButton, {
+    size: "sm"
+  })));
+};
+ShimmerPostItem.propTypes = {
+  title: _propTypes.default.bool,
+  text: _propTypes.default.bool,
+  cta: _propTypes.default.bool,
+  imageType: _propTypes.default.oneOf(["circular", "thumbnail"]),
+  imageHeight: _propTypes.default.number,
+  imageWidth: _propTypes.default.number
+};
+ShimmerPostItem.defaultProps = {
+  title: false,
+  text: false,
+  cta: false,
+  imageType: "thumbnail"
+};
+var ShimmerPostList = exports.ShimmerPostList = function ShimmerPostList(_ref) {
+  var _classNames;
+  var row = _ref.row,
+    col = _ref.col,
+    gap = _ref.gap,
+    className = _ref.className,
+    postStyle = _ref.postStyle;
+  var posts = {
+    STYLE_ONE: _react.default.createElement(ShimmerPostItem, {
+      title: true,
+      text: true,
+      cta: true
+    }),
+    STYLE_TWO: _react.default.createElement(ShimmerPostItem, {
+      title: true,
+      cta: true
+    }),
+    STYLE_THREE: _react.default.createElement(ShimmerPostItem, {
+      title: true
+    }),
+    STYLE_FOUR: _react.default.createElement(ShimmerPostItem, {
+      text: true,
+      cta: true
+    }),
+    STYLE_FIVE: _react.default.createElement(ShimmerPostItem, {
+      text: true
+    }),
+    STYLE_SIX: _react.default.createElement(ShimmerPostItem, {
+      title: true,
+      text: true,
+      cta: true,
+      imageType: "thumbnail",
+      imageWidth: 80,
+      imageHeight: 80,
+      contentCenter: true
+    }),
+    STYLE_SEVEN: _react.default.createElement(ShimmerPostItem, {
+      text: true,
+      cta: true,
+      imageType: "thumbnail",
+      imageWidth: 80,
+      imageHeight: 80,
+      contentCenter: true
+    }),
+    STYLE_EIGHT: _react.default.createElement(ShimmerPostItem, {
+      title: true,
+      cta: true,
+      imageType: "thumbnail",
+      imageWidth: 80,
+      imageHeight: 80,
+      contentCenter: true
+    })
+  };
+  var renderPosts = function renderPosts() {
+    var list = [];
+    var items = row * col;
+    for (var index = 0; index < items; index++) {
+      list.push(_react.default.createElement("div", {
+        key: index
+      }, posts[postStyle]));
+    }
+    return list;
+  };
+  return _react.default.createElement("div", {
+    className: classnames((_classNames = {
+      grid: true
+    }, defineProperty(_classNames, "grid-gap-" + gap, true), defineProperty(_classNames, "grid-column-" + col, true), defineProperty(_classNames, className, className), _classNames))
+  }, renderPosts());
+};
+ShimmerPostList.propTypes = {
+  row: _propTypes.default.number,
+  col: _propTypes.default.oneOf([2, 3, 4]),
+  gap: _propTypes.default.oneOf([20, 30]),
+  postStyle: _propTypes.default.oneOf(["STYLE_ONE", "STYLE_TWO", "STYLE_THREE", "STYLE_FOUR", "STYLE_FIVE", "STYLE_SIX", "STYLE_SEVEN", "STYLE_EIGHT"])
+};
+ShimmerPostList.defaultProps = {
+  row: 3,
+  col: 3,
+  gap: 20,
+  postStyle: "STYLE_ONE"
+};
+var ShimmerContentBlock = exports.ShimmerContentBlock = function ShimmerContentBlock(_ref) {
+  var card = _ref.card,
+    title = _ref.title,
+    text = _ref.text,
+    cta = _ref.cta,
+    thumbnailWidth = _ref.thumbnailWidth,
+    thumbnailHeight = _ref.thumbnailHeight,
+    reverse = _ref.reverse;
+  var renderContent = function renderContent() {
+    return _react.default.createElement("div", {
+      className: classnames({
+        flex: true,
+        "flex-reverse": reverse
+      })
+    }, _react.default.createElement("div", {
+      className: classnames({
+        flex: true,
+        "w-50": !thumbnailWidth
+      })
+    }, _react.default.createElement(ShimmerThumbnail, {
+      width: thumbnailWidth,
+      height: thumbnailHeight,
+      className: "h-100 m-0"
+    })), _react.default.createElement("div", {
+      className: " flex-1 p-30"
+    }, title && _react.default.createElement(ShimmerTitle, {
+      className: "w-40",
+      line: 1
+    }), text && _react.default.createElement(ShimmerText, null), cta && _react.default.createElement(ShimmerButton, null)));
+  };
+  if (!card) return renderContent();
+  return _react.default.createElement(ShimmerCard, null, renderContent());
+};
+ShimmerContentBlock.propTypes = {
+  card: _propTypes.default.bool,
+  title: _propTypes.default.bool,
+  text: _propTypes.default.bool,
+  cta: _propTypes.default.bool,
+  thumbnailWidth: _propTypes.default.number,
+  thumbnailHeight: _propTypes.default.number,
+  reverse: _propTypes.default.bool
+};
+ShimmerContentBlock.defaultProps = {
+  card: true,
+  title: false,
+  text: false,
+  cta: false,
+  reverse: false
+};
+var ShimmerSectionHeader = exports.ShimmerSectionHeader = function ShimmerSectionHeader(_ref) {
+  var title = _ref.title,
+    subTitle = _ref.subTitle,
+    center = _ref.center;
+  if (!title && !subTitle) return null;
+  return _react.default.createElement("div", {
+    className: classnames({
+      "w-60 mb-40": true,
+      "ml-auto mr-auto": center
+    })
+  }, title && _react.default.createElement(ShimmerTitle, {
+    className: classnames({
+      "w-40": true,
+      "ml-auto mr-auto": center
+    }),
+    line: 1
+  }), subTitle && _react.default.createElement("div", {
+    className: classnames({
+      "flex-horizontal-center": center
+    })
+  }, _react.default.createElement(ShimmerText, {
+    line: 1,
+    className: "mb-15 w-80"
+  }), _react.default.createElement(ShimmerText, {
+    line: 1,
+    className: "mb-15 w-70"
+  }), _react.default.createElement(ShimmerText, {
+    line: 1,
+    className: "mb-15 w-60"
+  })));
+};
+ShimmerSectionHeader.propTypes = {
+  title: _propTypes.default.bool,
+  subTitle: _propTypes.default.bool,
+  center: _propTypes.default.bool
+};
+ShimmerSectionHeader.defaultProps = {
+  title: true,
+  subTitle: true,
+  center: false
+};
+var css$9 = ".shimmer {\n  background: linear-gradient(to right, #f6f6f6 8%, #f0f0f0 18%, #f6f6f6 33%);\n  background-size: 1000px 100%;\n  animation: shimmer 2.2s linear infinite forwards; }\n\n@-webkit-keyframes shimmer {\n  0% {\n    background-position: -100% 0; }\n  100% {\n    background-position: 100% 0; } }\n\n@keyframes shimmer {\n  0% {\n    background-position: -1000px 0; }\n  100% {\n    background-position: 1000px 0; } }\n\n/*\n=====\nPadding Styles\n=====\n*/\n.p-30 {\n  padding: 30px; }\n\n.p-20 {\n  padding: 20px; }\n\n.p-15 {\n  padding: 15px; }\n\n/*\n=====\nMargin Styles\n=====\n*/\n.m-0 {\n  margin: 0; }\n\n.m-auto {\n  margin: auto; }\n\n.ml-auto {\n  margin-left: auto; }\n\n.mr-auto {\n  margin-right: auto; }\n\n.m-15 {\n  margin: 15px; }\n\n.m-30 {\n  margin: 30px; }\n\n.mb-0 {\n  margin-bottom: 0px; }\n\n.mb-10 {\n  margin-bottom: 10px; }\n\n.mb-15 {\n  margin-bottom: 15px; }\n\n.mb-20 {\n  margin-bottom: 20px; }\n\n.mt-15 {\n  margin-top: 15px; }\n\n.mb-30 {\n  margin-bottom: 30px; }\n\n.mb-40 {\n  margin-bottom: 40px; }\n\n/*\n=======\nContent Size Styles\n=======\n*/\n.w-10 {\n  width: 10%; }\n\n.w-20 {\n  width: 20%; }\n\n.w-30 {\n  width: 30%; }\n\n.w-40 {\n  width: 40%; }\n\n.w-50 {\n  width: 50%; }\n\n.w-60 {\n  width: 60%; }\n\n.w-70 {\n  width: 70%; }\n\n.w-80 {\n  width: 80%; }\n\n/*\n========\nFlex Styles\n========\n*/\n.flex {\n  display: flex; }\n\n.flex-direction-column {\n  flex-direction: column; }\n\n.flex-horizontal-center {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\n.flex-vertical-center {\n  align-items: center; }\n\n.flex-content-between {\n  justify-content: space-between; }\n\n.flex-reverse {\n  flex-direction: row-reverse; }\n\n.flex-1 {\n  flex-grow: 1; }\n\n/*\n=======\nGrid Styles\n=======\n*/\n.grid {\n  display: grid; }\n\n.grid-gap-10 {\n  gap: 10px; }\n\n.grid-gap-15 {\n  gap: 15px; }\n\n.grid-gap-20 {\n  gap: 20px; }\n\n.grid-gap-30 {\n  gap: 30px; }\n\n.grid-column-2 {\n  grid-template-columns: auto auto; }\n\n.grid-column-3 {\n  grid-template-columns: auto auto auto; }\n\n.grid-column-4 {\n  grid-template-columns: auto auto auto auto; }\n\n.text-center {\n  text-align: center; }\n\n.border-rounded {\n  border-radius: 4px; }\n\n.h-100 {\n  height: 100% !important; }\n\n.shimmer-hr {\n  border-color: #f6f6f6; }\n\n.shimmer-row {\n  display: flex;\n  margin: 0 -15px; }\n  .shimmer-row .shimmer-col,\n  .shimmer-row [class*=\"shimmer-col-\"] {\n    padding-left: 15px;\n    padding-right: 15px;\n    flex-basis: 0;\n    flex-grow: 1;\n    max-width: 100%; }\n";
+styleInject(css$9);
+},{"react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"utils/Shimmer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37879,45 +39606,34 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
-var _loading = _interopRequireDefault(require("../img/loading.webp"));
+var _reactShimmerEffects = require("react-shimmer-effects");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var Shimmer = function Shimmer() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Array(25).fill(" ").map(function (e) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      className: "loadingGif"
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: _loading.default,
-      alt: ""
-    }));
-  }));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactShimmerEffects.ShimmerPostList, {
+    postStyle: "STYLE_FOUR",
+    col: 3,
+    row: 2,
+    gap: 30
+  }), ";");
 };
 var _default = exports.default = Shimmer;
-},{"react":"node_modules/react/index.js","../img/loading.webp":"img/loading.webp"}],"components/Body.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-shimmer-effects":"node_modules/react-shimmer-effects/dist/index.es.js"}],"components/Body.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Helper = void 0;
-var _react = _interopRequireWildcard(require("react"));
+exports.default = void 0;
+var _react = _interopRequireDefault(require("react"));
 var _config = require("./config");
 var _reactRouterDom = require("react-router-dom");
-var _Header = _interopRequireDefault(require("./Header"));
 var _Shimmer = _interopRequireDefault(require("../utils/Shimmer"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Body = function Body(_ref) {
   var restData = _ref.restData;
   return (restData === null || restData === void 0 ? void 0 : restData.length) === 0 ? /*#__PURE__*/_react.default.createElement(_Shimmer.default, null) : /*#__PURE__*/_react.default.createElement("div", {
     className: "RestaurantList"
-  }, restData.map(function (res) {
+  }, restData === null || restData === void 0 ? void 0 : restData.map(function (res) {
     var _res$info;
     return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: "/restaurant/" + ((_res$info = res.info) === null || _res$info === void 0 ? void 0 : _res$info.id),
@@ -37925,19 +39641,8 @@ var Body = function Body(_ref) {
     }, /*#__PURE__*/_react.default.createElement(_config.RestaurantCard, res === null || res === void 0 ? void 0 : res.info));
   }));
 };
-var Helper = exports.Helper = function Helper() {
-  var _useState = (0, _react.useState)([]),
-    _useState2 = _slicedToArray(_useState, 2),
-    restData = _useState2[0],
-    setrestData = _useState2[1];
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Header.default, {
-    setrestData: setrestData
-  }), /*#__PURE__*/_react.default.createElement(Body, {
-    restData: restData
-  }));
-};
 var _default = exports.default = Body;
-},{"react":"node_modules/react/index.js","./config":"components/config.js","react-router-dom":"node_modules/react-router-dom/dist/index.js","./Header":"components/Header.js","../utils/Shimmer":"utils/Shimmer.js"}],"components/About.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./config":"components/config.js","react-router-dom":"node_modules/react-router-dom/dist/index.js","../utils/Shimmer":"utils/Shimmer.js"}],"components/About.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38106,7 +39811,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactRouterDom = require("react-router-dom");
-var _loading = _interopRequireDefault(require("../img/loading.webp"));
+var _reactShimmerEffects = require("react-shimmer-effects");
 var _Constant = require("../utils/Constant");
 var _useRestaurant = _interopRequireDefault(require("../utils/useRestaurant"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -38186,11 +39891,10 @@ var RestaurantMenu = function RestaurantMenu() {
       return _ref.apply(this, arguments);
     };
   }();
-  return restaurantMenu.length === 0 ? /*#__PURE__*/_react.default.createElement("div", {
-    className: "loadingGif"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: _loading.default,
-    alt: ""
+  return restaurantMenu.length === 0 ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactShimmerEffects.ShimmerSimpleGallery, {
+    card: true,
+    imageHeight: 300,
+    caption: true
   })) : /*#__PURE__*/_react.default.createElement("div", {
     className: "restaurant-menu"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -38222,41 +39926,313 @@ var RestaurantMenu = function RestaurantMenu() {
   }))));
 };
 var _default = exports.default = RestaurantMenu;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/dist/index.js","../img/loading.webp":"img/loading.webp","../utils/Constant":"utils/Constant.js","../utils/useRestaurant":"utils/useRestaurant.js"}],"FlavorFiesta.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/dist/index.js","react-shimmer-effects":"node_modules/react-shimmer-effects/dist/index.es.js","../utils/Constant":"utils/Constant.js","../utils/useRestaurant":"utils/useRestaurant.js"}],"components/Profile.js":[function(require,module,exports) {
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw new Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator.return && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw new Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, catch: function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+var Profile = /*#__PURE__*/function (_React$Component) {
+  _inherits(Profile, _React$Component);
+  function Profile(props) {
+    var _this;
+    _classCallCheck(this, Profile);
+    _this = _callSuper(this, Profile, [props]);
+    _this.state = {
+      count: 1,
+      userInfo: {
+        name: "",
+        avatar_url: "avatar_url"
+      },
+      count2: []
+    };
+    return _this;
+  }
+  _createClass(Profile, [{
+    key: "componentDidMount",
+    value: function () {
+      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var data, json;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return fetch("https://api.github.com/users/sdevesh890");
+            case 3:
+              data = _context.sent;
+              _context.next = 6;
+              return data.json();
+            case 6:
+              json = _context.sent;
+              this.setState({
+                userInfo: json
+              });
+              _context.next = 13;
+              break;
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](0);
+              console.error("Error fetching data:", _context.t0);
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, this, [[0, 10]]);
+      }));
+      function componentDidMount() {
+        return _componentDidMount.apply(this, arguments);
+      }
+      return componentDidMount;
+    }()
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state$userInfo = this.state.userInfo,
+        name = _this$state$userInfo.name,
+        avatar_url = _this$state$userInfo.avatar_url;
+      // const {count , count2} = this.state;
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Name : ", name), /*#__PURE__*/_react.default.createElement("img", {
+        src: avatar_url,
+        alt: ""
+      }));
+    }
+  }]);
+  return Profile;
+}(_react.default.Component);
+var _default = exports.default = Profile;
+},{"react":"node_modules/react/index.js"}],"img/titleLogo.png":[function(require,module,exports) {
+module.exports = "/titleLogo.96d94e1c.png";
+},{}],"components/Header.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.Title = void 0;
+var _react = _interopRequireWildcard(require("react"));
+var _titleLogo = _interopRequireDefault(require("../img/titleLogo.png"));
+var _reactRouterDom = require("react-router-dom");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw new Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator.return && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw new Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, catch: function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function filterData(searchText, restaurant) {
+  var arr = [];
+  for (var i = 0; i < restaurant.length; i++) {
+    if (restaurant[i].info.name.includes(searchText)) {
+      arr.push(restaurant[i]);
+    }
+  }
+  return arr;
+}
+var Title = exports.Title = function Title() {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("a", {
+    href: "/"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _titleLogo.default,
+    alt: "Logo Image",
+    id: "LogoImg"
+  })));
+};
+var Header = function Header(_ref) {
+  var setrestData = _ref.setrestData;
+  var _useState = (0, _react.useState)(),
+    _useState2 = _slicedToArray(_useState, 2),
+    restaurant = _useState2[0],
+    setRestaurant = _useState2[1];
+  //searchText is a local state variable
+  var _useState3 = (0, _react.useState)(),
+    _useState4 = _slicedToArray(_useState3, 2),
+    searchText = _useState4[0],
+    setsearchText = _useState4[1];
+  (0, _react.useEffect)(function () {
+    getRestaurant();
+  }, []);
+  var getRestaurant = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var data, json, checkJsonData, _checkJsonData, resData;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _checkJsonData = function _checkJsonData3() {
+              _checkJsonData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(jsonData) {
+                var i, _jsonData$data, _json$data, checkData;
+                return _regeneratorRuntime().wrap(function _callee$(_context) {
+                  while (1) switch (_context.prev = _context.next) {
+                    case 0:
+                      i = 0;
+                    case 1:
+                      if (!(i < (jsonData === null || jsonData === void 0 || (_jsonData$data = jsonData.data) === null || _jsonData$data === void 0 ? void 0 : _jsonData$data.cards.length))) {
+                        _context.next = 8;
+                        break;
+                      }
+                      // initialize checkData for Swiggy Restaurant data
+                      checkData = json === null || json === void 0 || (_json$data = json.data) === null || _json$data === void 0 || (_json$data = _json$data.cards[i]) === null || _json$data === void 0 || (_json$data = _json$data.card) === null || _json$data === void 0 || (_json$data = _json$data.card) === null || _json$data === void 0 || (_json$data = _json$data.gridElements) === null || _json$data === void 0 || (_json$data = _json$data.infoWithStyle) === null || _json$data === void 0 ? void 0 : _json$data.restaurants; // if checkData is not undefined then return it
+                      if (!(checkData !== undefined)) {
+                        _context.next = 5;
+                        break;
+                      }
+                      return _context.abrupt("return", checkData);
+                    case 5:
+                      i++;
+                      _context.next = 1;
+                      break;
+                    case 8:
+                    case "end":
+                      return _context.stop();
+                  }
+                }, _callee);
+              }));
+              return _checkJsonData.apply(this, arguments);
+            };
+            checkJsonData = function _checkJsonData2(_x) {
+              return _checkJsonData.apply(this, arguments);
+            };
+            _context2.next = 4;
+            return fetch("https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING");
+          case 4:
+            data = _context2.sent;
+            _context2.next = 7;
+            return data.json();
+          case 7:
+            json = _context2.sent;
+            _context2.next = 10;
+            return checkJsonData(json);
+          case 10:
+            resData = _context2.sent;
+            setrestData(resData);
+            setRestaurant(resData);
+          case 13:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    }));
+    return function getRestaurant() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "header"
+  }, /*#__PURE__*/_react.default.createElement(Title, null), /*#__PURE__*/_react.default.createElement("div", {
+    className: "nav-items"
+  }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/",
+    className: "active"
+  }, "Home")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/about"
+  }, "About")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/contact"
+  }, "Contact")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    href: ""
+  }, "Cart")))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "SearchItem"
+  }, /*#__PURE__*/_react.default.createElement("form", {
+    action: ""
+  }, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "",
+    id: "Searchinput",
+    placeholder: "Search Your Item",
+    value: searchText,
+    onChange: function onChange(e) {
+      setsearchText(e.target.value);
+    }
+  }), /*#__PURE__*/_react.default.createElement("button", {
+    type: "submit",
+    id: "input-btn",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      var data = filterData(searchText, restaurant);
+      setrestData(data);
+    }
+  }, "SEARCH"))));
+};
+var _default = exports.default = Header;
+},{"react":"node_modules/react/index.js","../img/titleLogo.png":"img/titleLogo.png","react-router-dom":"node_modules/react-router-dom/dist/index.js"}],"FlavorFiesta.js":[function(require,module,exports) {
+"use strict";
+
+var _react = _interopRequireWildcard(require("react"));
 var _client = _interopRequireDefault(require("react-dom/client"));
-var _Body = require("./components/Body");
+var _Body = _interopRequireDefault(require("./components/Body"));
 var _reactRouterDom = require("react-router-dom");
 var _About = _interopRequireDefault(require("./components/About"));
 var _Error = _interopRequireDefault(require("./components/Error"));
 var _RestaurantMenu = _interopRequireDefault(require("./components/RestaurantMenu"));
+var _Profile = _interopRequireDefault(require("./components/Profile"));
+var _Header = _interopRequireDefault(require("./components/Header"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-// import {Title, Search} from './components/Header' --> Named Import
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import {Title, Search} from './components/Header' --> Named Import
 // import Header from "./components/Header"; //Default Import 
 // import Body from "./components/Body";
-
 var Applayout = function Applayout() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Body.Helper, null));
+  var _useState = (0, _react.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    restData = _useState2[0],
+    setrestData = _useState2[1];
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Header.default, {
+    setrestData: setrestData
+  }), /*#__PURE__*/_react.default.createElement(_Body.default, {
+    restData: restData
+  }));
 };
 var appRouter = (0, _reactRouterDom.createBrowserRouter)([{
   path: "/",
   element: /*#__PURE__*/_react.default.createElement(Applayout, null),
-  errorElement: /*#__PURE__*/_react.default.createElement(_Error.default, null),
-  children: []
+  errorElement: /*#__PURE__*/_react.default.createElement(_Error.default, null)
 }, {
   path: "/about",
   element: /*#__PURE__*/_react.default.createElement(_About.default, null)
 }, {
   path: "/restaurant/:id",
   element: /*#__PURE__*/_react.default.createElement(_RestaurantMenu.default, null)
+}, {
+  path: "/about/profile",
+  element: /*#__PURE__*/_react.default.createElement(_Profile.default, {
+    name: "Devesh Sharma"
+  })
 }]);
 var root = _client.default.createRoot(document.getElementById('root'));
-root.render( /*#__PURE__*/_react.default.createElement(_reactRouterDom.RouterProvider, {
+root.render( /*#__PURE__*/_react.default.createElement(_react.default.StrictMode, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.RouterProvider, {
   router: appRouter
-}));
-},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","./components/Body":"components/Body.js","react-router-dom":"node_modules/react-router-dom/dist/index.js","./components/About":"components/About.js","./components/Error":"components/Error.js","./components/RestaurantMenu":"components/RestaurantMenu.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+})));
+},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","./components/Body":"components/Body.js","react-router-dom":"node_modules/react-router-dom/dist/index.js","./components/About":"components/About.js","./components/Error":"components/Error.js","./components/RestaurantMenu":"components/RestaurantMenu.js","./components/Profile":"components/Profile.js","./components/Header":"components/Header.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -38281,7 +40257,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8447" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "14382" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

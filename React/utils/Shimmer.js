@@ -1,14 +1,10 @@
 import React from "react";
-import Logo from "../img/loading.webp";
+import { ShimmerPostList } from "react-shimmer-effects";
 const Shimmer = () =>
 {
     return(
         <>
-        {
-            Array(25).fill(" ").map((e)=>(
-                <div className="loadingGif"><img src={Logo} alt="" /></div>
-            ))
-        }
+      <ShimmerPostList postStyle="STYLE_FOUR" col={3} row={2} gap={30} />;
         </>
     );
 }

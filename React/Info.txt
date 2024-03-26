@@ -79,3 +79,16 @@ react-router-dom --> used for routing in react.
 Class Based Component --> component which build using class.
 --> Important for interview purpose
 
+Props in class Component -> this.props
+useSate --> constructor 
+Why we use Super keyword inside constructor ?
+We use Super Keyword in constructor  , so we can excute parent class constructor(React.Component) and you cant use this keyword in constructor before calling Super();
+
+--> WE DO NOT MUTATE STATE DIRECTLY
+
+
+componentDidMount --> Work as useEffect in class based component and Best place to make a API CALL.
+
+React Life Cycle  -> There are two phase 
+Render Phase --> constructor and render method.
+Commit Phase --> Work with DOM , run side effect , schedule update. i.e --> componentDidMount  , componentDidUpdate

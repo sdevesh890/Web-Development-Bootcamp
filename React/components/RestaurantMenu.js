@@ -1,6 +1,6 @@
 import React, { useState ,useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Logo from "../img/loading.webp";
+import { ShimmerSimpleGallery} from "react-shimmer-effects";
 import {
     swiggy_menu_api_URL,
     IMG_CDN_URL,
@@ -47,7 +47,9 @@ const RestaurantMenu = () =>
                 
     }
     return (restaurantMenu.length===0)?(
-        <div className="loadingGif"><img src={Logo} alt="" /></div>
+       <div>
+      <ShimmerSimpleGallery card imageHeight={300} caption />
+       </div>
     ):(
         <div className="restaurant-menu">
         <div className="restaurant-details">
