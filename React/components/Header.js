@@ -2,6 +2,7 @@ import React from 'react';
 import Titlelogo from '../img/titleLogo.png';
 import { useState , useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import useOnline from '../utils/useOnline';
 
 function filterData(searchText , restaurant) 
 {
@@ -17,8 +18,6 @@ function filterData(searchText , restaurant)
     return arr;
 
 }
-
-
 export const Title = () =>
 {
     return(
@@ -32,14 +31,14 @@ export const Title = () =>
 
 const Header =({setrestData})=>
 {
-    const [restaurant,setRestaurant] = useState();
-    //searchText is a local state variable
-    const [searchText, setsearchText] = useState();
 
     useEffect(()=>
     {
         getRestaurant();
     },[])
+    const [restaurant,setRestaurant] = useState();
+    //searchText is a local state variable
+    const [searchText, setsearchText] = useState();
     const getRestaurant = async() =>
     {
         const data = await fetch("https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING");
@@ -73,6 +72,7 @@ const Header =({setrestData})=>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact">Contact</Link></li>
               <li><a href="">Cart</a></li>
+              <li><a href="/instamart">Instamart</a></li>
             </ul>
            </div>
            <div className="SearchItem">

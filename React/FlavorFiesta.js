@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React , {lazy , useState , Suspense} from "react";
 import ReactDOM from "react-dom/client";
 // import {Title, Search} from './components/Header' --> Named Import
 // import Header from "./components/Header"; //Default Import 
@@ -10,7 +10,11 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
 import Header from "./components/Header";
+import Shimmer from "./utils/Shimmer";
+// import Instamart from "./components/Instamart"
 
+//On-demand Loading -> upon render -> react suspend loading
+const Instamart = lazy(()=> import("./components/Instamart"));
 const Applayout = () =>
 {
     const[restData , setrestData] = useState([]);
@@ -49,6 +53,15 @@ const appRouter = createBrowserRouter([
     {
         path:"/about/profile",
         element : <Profile name={"Devesh Sharma"}/>
+    },
+    {
+        path : "/instamart",
+        element : 
+        (
+            <Suspense fallback={<Shimmer/>}>
+                <Instamart/>
+            </Suspense>
+        )
     }
 ]);
 

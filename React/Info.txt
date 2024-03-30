@@ -92,3 +92,11 @@ componentDidMount --> Work as useEffect in class based component and Best place 
 React Life Cycle  -> There are two phase 
 Render Phase --> constructor and render method.
 Commit Phase --> Work with DOM , run side effect , schedule update. i.e --> componentDidMount  , componentDidUpdate
+
+
+How to create custom hook ? You can create custom hook by simple functional component but you have to name by adding 'use' in the starting.
+
+
+Dynamic import --> You click component bundle when you click , it will not import every code in one way. Now it will help use to build our application fast because our component will only render when we click it.
+
+How can we do that ?
