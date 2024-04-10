@@ -1,9 +1,9 @@
-import React from 'react';
+import React , {useContext} from 'react';
 import Titlelogo from '../img/titleLogo.png';
 import { useState , useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import useOnline from '../utils/useOnline';
-
+import {useSelector} from "react-redux";
+import store from '../utils/store';
 function filterData(searchText , restaurant) 
 {
     const arr = [];
@@ -31,7 +31,7 @@ export const Title = () =>
 
 const Header =({setrestData})=>
 {
-
+    const cartItem = useSelector(store => store.cart.items);
     useEffect(()=>
     {
         getRestaurant();
@@ -71,8 +71,8 @@ const Header =({setrestData})=>
               <li><Link to="/" className='active'>Home</Link></li>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact">Contact</Link></li>
-              <li><a href="">Cart</a></li>
-              <li><a href="/instamart">Instamart</a></li>
+              <li><Link to="/cart">Cart <span id='cartItem'>{cartItem.length}</span></Link></li>
+              <li><Link to="/instamart">Instamart </Link></li>
             </ul>
            </div>
            <div className="SearchItem">

@@ -2,13 +2,10 @@ import React, { useState ,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ShimmerSimpleGallery} from "react-shimmer-effects";
 import {
-    swiggy_menu_api_URL,
-    IMG_CDN_URL,
-    ITEM_IMG_CDN_URL,
     MENU_ITEM_TYPE_KEY,
-    RESTAURANT_TYPE_KEY,
 } from "../utils/Constant";
-import useRestaurant from "../utils/useRestaurant"
+import { additem } from "../utils/cartSlice";
+import {useDispatch} from "react-redux";
 const RestaurantMenu = () =>
 {
     const {id} = useParams();
@@ -42,9 +39,12 @@ const RestaurantMenu = () =>
                         uniqueMenuItems.push(item);
                     }
                 });
-
                 setRestaurantMenu(uniqueMenuItems);
-                
+    }
+    const dispatch = useDispatch();
+    const handleItem = (item)=>
+    {
+       dispatch(additem(item));
     }
     return (restaurantMenu.length===0)?(
        <div>
@@ -55,7 +55,7 @@ const RestaurantMenu = () =>
         <div className="restaurant-details">
           <img
             className="restaurant-img"
-            src={IMG_CDN_URL + restaurantDetails?.cloudinaryImageId}
+            src={"https://media-assets.swiggy.com/swiggy/image/upload/"+ restaurantDetails?.cloudinaryImageId}
             alt={restaurantDetails?.name}
           />
           <div className="details">
@@ -83,6 +83,7 @@ const RestaurantMenu = () =>
                   </p>
                 </div>
                 <div className="description">{item?.description}</div>
+                <div className="Menubtn"><button onClick={()=> handleItem(item)}>Add +</button></div>
               </div>
             ))}
           </div>

@@ -100,3 +100,14 @@ How to create custom hook ? You can create custom hook by simple functional comp
 Dynamic import --> You click component bundle when you click , it will not import every code in one way. Now it will help use to build our application fast because our component will only render when we click it.
 
 How can we do that ?
+lazy loading..
+
+
+What is redux --> Redux is used for manage data.
+ --> You can store multiple section data
+ --> You cant directly modify card. You have to do by dipatch & action which call the function(reducer) then it will modify.
+
+--> A “selector” is simply a function that accepts Redux state as an argument and returns data that is derived from that state. 
+
+flow data --> 
+dispatch(action) -> reducer -> update -> store(slice) -> selector -> use the state.
