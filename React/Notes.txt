@@ -1,0 +1,74 @@
+//Basic 
+crossorigin - Cross-Origin Resource Sharing(CORS) is a tool that allows web pages requesting for resources from another domain that is outside of their own domain. It is also used for managing cross-origin requests which is a request for a resource from an outside domain.
+
+-> React overwrite or replaced everything whatever written inside the root element in HTML.
+
+What is Bundlers ? -> 
+A bundler in react. js is a tool which allows to package code into a single file or bundle. Due to this size of code will reduce and so performance of application will improve. Common bundlers used with React are Webpack and Parcel. 
+
+What special Parcel do ? 
+-> Hot Module Replacement: Hot Module Replacement (HMR) is a feature that enables real-time updates to modules in a running application without requiring a full page reload.
+
+-> File Watcher Algorithm : A file watcher algorithm monitors a directory for file activity and triggers a follow-up process when a file is created, amended, deleted, or renamed.
+
+-> Minify : Parcel includes minifiers for JavaScript, CSS, HTML, and SVG out of the box. Minification reduces the file size of your output bundles by removing whitespace, renaming variables to shorter names, and many other optimizations.
+
+--> Image optimizations 
+--> Clean code
+
+-> parcel build is used to create a production-ready bundle of files that can be deployed in various ways. A very common workflow is to point parcel at an html file to build a client-side application that can be delivered by a file server (e.g. parcel build src/index.html). In this scenario, all the JavaScript is run by the user's browser, and the server is only responsible for serving the static files created by parcel build.
+
+What is Babel ? Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments. Here are the main things Babel can do for you:
+
+Transform syntax
+Polyfill features that are missing in your target environment (through a third-party polyfill such as core-js)
+Source code transformations (codemods)
+
+What is Babel plugin transform remove console ? -> this plugin will remove all console from our application which work as optimizations.
+
+
+
+What is Key in React ? 
+-> Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity:
+
+Example:
+
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number) =>
+  <li key={number.toString()}>
+    {number}
+  </li>
+);
+
+
+What is JSX ?JSX is a syntax extension for JavaScript that lets you write HTML-like markup inside a JavaScript file.
+
+Expression Slots -> In JSX, the content we put between open/close tags is treated as a static string. If we try and reference a variable, it'll print the variable name itself, rather than the value it references. We can create expression slots with curly brackets ({}). Anything placed in-between curly brackets will be treated as pure JavaScript, instead of a string.JSX turns into React.createElement() function calls, we'll get a JavaScript syntax error if we try and place a statement in that slot. It has to be an expression.
+
+
+What is Component ? -> a component is a bundle of markup, styles, and logic that controls everything about a specific part of the user interface. Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.They are two type of component -> functional based component - NEW WAY 2. Class based component - OLD ways
+
+**NAME OF COMPONENT STARTS WITH A CAPITAL LETTER
+
+
+What is Props ? components have a thing called props. Props are like arguments to a function: they allow us to pass data to our components, so that the components can include customizations based on the data.
+
+What is children props ?When we pass something between the open and close tags, React will automatically supply that value to us under children.
+root.render(
+  <RedButton>
+    Don't click me
+  </RedButton>
+);
+function RedButton({ children }) {
+  return (
+    <button
+      style={{
+        color: 'white',
+        backgroundColor: 'red',
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
