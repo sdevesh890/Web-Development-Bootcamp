@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import CRM from "./Exercises/Component";
+import { Event } from "./Component/State";
 // const heading  = React.createElement('h1',{},'Heading 1');
 // const heading2 = React.createElement('h2',{id : 'title-2'},'Heading2');
 // const div = React.createElement('div',{},[heading,heading2]);
@@ -45,7 +45,17 @@ const element = React.createElement(
         name : "Krishna"
     }
 );
-console.log(element);
+
+
+function App()
+{
+    return(
+        <>
+        <Event/>
+        </>
+    );
+}
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -56,8 +66,9 @@ root.render(
         <div>Children Props Value</div>
         </FriendlyGreetings>
        {element} */}
+       {/* <CRM name= "Dev Sharma" job="Software Engineer" email="sdev56@gmail.com"/>
        <CRM name= "Dev Sharma" job="Software Engineer" email="sdev56@gmail.com"/>
-       <CRM name= "Dev Sharma" job="Software Engineer" email="sdev56@gmail.com"/>
-       <CRM name= "Dev Sharma" job="Software Engineer" email="sdev56@gmail.com"/>
+       <CRM name= "Dev Sharma" job="Software Engineer" email="sdev56@gmail.com"/> */}
+       <App/>
     </div>
 );
