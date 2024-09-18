@@ -89,7 +89,9 @@ Step 5 – Update to the Real DOM: finally, React applies the necessary changes 
 
 What is state ? state is a component's memory that stores data and information, and determines how the component behaves and renders.
 
-what is useState? The useState Hook in React adds state variables to functional components and allows you to track state in your application
+what is useState? The useState Hook in React adds state variables to functional components and allows you to track state in your application.
+
+**Note -> Never ever create a useState in if-else , for loop & outside of the component.
 
 What is re-rendering ? 
 A re-render is a React process where it figures out what needs to change (AKA. “reconciliation”, the spot-the-differences game).
@@ -105,3 +107,7 @@ What is useEffect => The useEffect hook is used to perform side effects in your 
 
 There are two parameter - 1. call back 2. dependency array
 
+
+What is react-router-dom ? Its a great library for routing.
+
+useParams -> Its a hook to read routing params.

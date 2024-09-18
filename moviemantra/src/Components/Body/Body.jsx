@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Body.css";
 import Shimmer from "./Shimmer";
+import {Link} from "react-router-dom";
+
 const MovieCart = ({ movieData }) => {
   return (
     <div className="MovieCart">
@@ -71,7 +73,9 @@ const Body = () => {
             <p>No movies found</p>
           ) : (
             filteredData.map((movie) => (
-              <MovieCart movieData={movie} key={movie.id} />
+              <Link to={"/movie/"+ movie.id}>
+                <MovieCart movieData={movie} key={movie.id} />
+              </Link>
             ))
           )}
         </div>
