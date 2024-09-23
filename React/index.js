@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Event } from "./Component/State";
+import ReactCompo from "./Component/ReactCompo";
 // const heading  = React.createElement('h1',{},'Heading 1');
 // const heading2 = React.createElement('h2',{id : 'title-2'},'Heading2');
 // const div = React.createElement('div',{},[heading,heading2]);
@@ -51,7 +51,7 @@ function App()
 {
     return(
         <>
-        <Event/>
+        <ReactCompo name = "Devesh" location=  "moon"/>
         </>
     );
 }

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Body.css";
 import Shimmer from "./Shimmer";
 import {Link} from "react-router-dom";
+import { filterData } from "../../utils/helper";
+import useMovieGenre from "../../utils/useMovieGenre";
 
 const MovieCart = ({ movieData }) => {
   return (
@@ -28,25 +30,25 @@ const Body = () => {
   }, []);
 
   async function getMovieAPI() {
-    setIsLoading(true);
-    const data = await fetch(
-      "https://api.themoviedb.org/3/discover/movie?api_key=8dacece17474e5f5c15064b2f81c9378"
-    );
-    const result = await data.json();
-    setMovieData(result.results);
-    setFilteredData(result.results);
-    setIsLoading(false);
+      setIsLoading(true);
+      const data = await fetch(
+        "https://api.themoviedb.org/3/discover/movie?api_key=8dacece17474e5f5c15064b2f81c9378"
+      );
+      const result = await data.json();
+      setMovieData(result.results);
+      setFilteredData(result.results);
+      setIsLoading(false);
   }
-
-  function filterData(searchText, movieData) {
-    const data = movieData.filter((movie) =>
-      movie.title.toLowerCase().includes(searchText.toLowerCase())
-    );
-    return data;
-  }
-
   return (
     <div className="Container">
+       <label for="movies">Choose category:</label>
+
+<select name="movies" id="collections">
+  <option value="war">War</option>
+  <option value="Adventure">Adventure</option>
+  <option value="Comedy">Comedy</option>
+  <option value="Horror">Horror</option>
+</select>
       <div className="search-container">
         <input
           type="text"
@@ -73,8 +75,8 @@ const Body = () => {
             <p>No movies found</p>
           ) : (
             filteredData.map((movie) => (
-              <Link to={"/movie/"+ movie.id}>
-                <MovieCart movieData={movie} key={movie.id} />
+              <Link to={"/movie/"+ movie.id} key={movie.id} style={{textDecoration : 'none'}}>
+                <MovieCart movieData={movie}/>
               </Link>
             ))
           )}

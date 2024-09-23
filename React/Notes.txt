@@ -111,3 +111,19 @@ There are two parameter - 1. call back 2. dependency array
 What is react-router-dom ? Its a great library for routing.
 
 useParams -> Its a hook to read routing params.
+
+What is class based component ? Class based component is nothing but siblings of functional based component but one difference is we used class for component instead of function. There is no more use of this component now! Only important for interview purpose;
+
+**IMPO --> the constructor and super keyword are used to initialize components, access properties, and inherit functionality from parent classes: 
+Constructor: The constructor is used to build components faster. 
+Super: The super keyword is used to call the constructor of the parent class, and access its properties and methods. 
+
+Super(props): The super(props) method is used to call the parent class constructor, pass props to it, and ensure that the component's props are available in the constructor. This is important for setting up the component's initial state and accessing props. 
+
+How to use Props ? -> Example -> {this.props.name}
+How to use useState ?  this.state.state_name
+
+ComponentDidMount => A function which execute after render(once). best place for API Calling.
+
+ComponentDidUpdate => invoke after every render.
+
